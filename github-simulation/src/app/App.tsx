@@ -1,6 +1,7 @@
 import '../App.css'
 import {createBrowserRouter, RouterProvider} from "react-router-dom"
 import Login from "../pages/Login/login.tsx"
+import Profile from "../pages/Profile/Profile.tsx"
 
 function App() {
 
@@ -12,7 +13,12 @@ function App() {
       {
         path: "/login",
         element: <Login />,
-      }
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
+
     ])
   
     return (
