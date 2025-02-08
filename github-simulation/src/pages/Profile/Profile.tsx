@@ -1,9 +1,11 @@
 import ProfileLayout from "../../components/layout/profileLayout";
 
-const Login = () => {
+const Profile = () => {
     return (
-        <ProfileLayout/>
+        <ProfileLayout>
+            Profile
+        </ProfileLayout>
     )
 }
 
-export default Login;
+export default Profile;
