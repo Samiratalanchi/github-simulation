@@ -10,7 +10,7 @@ const Overview = () => {
     const day = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
     const years = ["2025", "2024", "2023", "2022", "2021"];
 
-    const [activeButton, setActiveButton] = useState("2025");
+    const [activeYearButton, setActiveYearButton] = useState("2025");
 
     return (
         <>
@@ -154,11 +154,11 @@ const Overview = () => {
                             key={year}
                             type="button"
                             className={`flex p-2 rounded text-gray-400 ${
-                                activeButton === year
+                                activeYearButton === year
                                     ? "bg-blue-700 text-white"
                                     : "hover:bg-gray-200"
                             }`}
-                            onClick={() => setActiveButton(year)}
+                            onClick={() => setActiveYearButton(year)}
                         >
                             {year}
                         </button>

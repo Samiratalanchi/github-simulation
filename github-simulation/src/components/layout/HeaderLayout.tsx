@@ -1,5 +1,8 @@
 import logo from "../../images/logo.png"
 import profilePic from "../../images/IMG_0080.jpg"
+
+import { useState } from "react";
+
 import { IoMdMenu } from "react-icons/io";
 import { RiGitRepositoryLine } from "react-icons/ri";
 import { VscGithubProject, VscIssues } from "react-icons/vsc";
@@ -11,6 +14,17 @@ import { LuGitPullRequestArrow } from "react-icons/lu";
 import { FaCaretDown } from "react-icons/fa";
 
 const HeaderLayout = ({ children }: { children: React.ReactNode }) => {
+
+    const tabs = [
+        { name: "Overview", icon: BsBook },
+        { name: "Repositories", icon: RiGitRepositoryLine, count: 20 },
+        { name: "Projects", icon: VscGithubProject, count: 20 },
+        { name: "Packages", icon: GoPackage, count: 20 },
+        { name: "Stars", icon: CiStar, count: 20 },
+    ];
+
+    const [activeTab, setActiveTab] = useState("Overview");
+
     return (
         <>
             <div className="fixed inset-x-0 flex w-full flex-row border-b border-gray-300">
@@ -58,42 +72,29 @@ const HeaderLayout = ({ children }: { children: React.ReactNode }) => {
                             </ul>
                         </div>
                     </div>
-                    <div className="flex h-10 shrink-0 items-center">
+                    <div className="flex shrink-0 items-center">
                         <ul className="list-none flex flex-row grow gap-x-4 text-[14px]">
-                            <li className="hover:bg-gray-200 active:border-b-3 active:border-orange-300 rounded-md p-2 text-gray-600 active:text-black">
-                                <a className="flex items-center gap-x-2">
-                                    <BsBook className="text-lg" />
-                                    <span>Overview</span>
-                                </a>
-                            </li>
-                            <li className="hover:bg-gray-200 active:border-b-3 active:border-orange-300 rounded-md p-2 text-gray-600 active:text-black">
-                                <a className="flex items-center gap-x-2">
-                                    <RiGitRepositoryLine className="text-lg" />
-                                    <span>Repositories</span>
-                                    <span className="bg-gray-200 rounded-md px-1">20</span>
-                                </a>
-                            </li>
-                            <li className="hover:bg-gray-200 active:border-b-3 active:border-orange-300 rounded-md p-2 text-gray-600 active:text-black">
-                                <a className="flex items-center gap-x-2">
-                                    <VscGithubProject className="text-lg" />
-                                    <span>Projects</span>
-                                    <span className="bg-gray-200 rounded-md px-1">20</span>
-                                </a>
-                            </li>
-                            <li className="hover:bg-gray-200 active:border-b-3 active:border-orange-300 rounded-md p-2 text-gray-600 active:text-black">
-                                <a className="flex items-center gap-x-2">
-                                    <GoPackage className="text-lg" />
-                                    <span>Packages</span>
-                                    <span className="bg-gray-200 rounded-md px-1">20</span>
-                                </a>
-                            </li>
-                            <li className="hover:bg-gray-200 active:border-b-3 active:border-orange-300 rounded-md p-2 text-gray-600 active:text-black">
-                                <a className="flex items-center gap-x-2">
-                                    <CiStar className="text-lg" />
-                                    <span>Stars</span>
-                                    <span className="bg-gray-200 rounded-md px-1">20</span>
-                                </a>
-                            </li>
+                            {tabs.map((tab) => (
+                                <li
+                                    key={tab.name}
+                                    onClick={() => setActiveTab(tab.name)}
+                                    className={`cursor-pointer hover:bg-gray-200 rounded-tl-md rounded-tr-md p-1 pb-2 ${
+                                        activeTab === tab.name
+                                            ? "text-black border-b-2 border-orange-400"
+                                            : "text-gray-600"
+                                    }`}
+                                >
+                                    <a className="flex items-center gap-x-2">
+                                        <tab.icon className="text-lg" />
+                                        <span>{tab.name}</span>
+                                        {tab.count && (
+                                            <span className="bg-gray-300 rounded-md px-1">
+                                                {tab.count}
+                                            </span>
+                                        )}
+                                    </a>
+                                </li>
+                            ))}
                         </ul>
                     </div>
                 </div>
