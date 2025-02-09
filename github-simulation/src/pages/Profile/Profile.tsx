@@ -1,10 +1,13 @@
-import ProfileLayout from "../../components/layout/profileLayout";
+import HeaderLayout from "../../components/layout/HeaderLayout";
+import ProfileSideBar from "../../components/layout/ProfileSideBar";
 
 const Profile = () => {
     return (
-        <ProfileLayout>
-            Profile
-        </ProfileLayout>
+        <HeaderLayout>
+            <ProfileSideBar>
+                hfjdgf
+            </ProfileSideBar>
+        </HeaderLayout>
     )
 }
 

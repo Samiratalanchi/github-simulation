@@ -10,7 +10,7 @@ import { FiInbox, FiPlus } from "react-icons/fi";
 import { LuGitPullRequestArrow } from "react-icons/lu";
 import { FaCaretDown } from "react-icons/fa";
 
-const ProfileLayout = ({ children }:{children: React.ReactNode}) => {
+const HeaderLayout = ({ children }: { children: React.ReactNode }) => {
     return (
         <>
             <div className="fixed inset-x-0 flex w-full flex-row">
@@ -98,9 +98,10 @@ const ProfileLayout = ({ children }:{children: React.ReactNode}) => {
                     </div>
                 </div>
             </div>
-            {children}
+            <div className="flex flex-row h-full">{children}</div>
         </>
+        
     );
 }
 
-export default ProfileLayout;
+export default HeaderLayout;
