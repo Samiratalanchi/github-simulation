@@ -3,6 +3,8 @@ import React from "react";
 import ProfilePic from "../../images/IMG_0080.jpg"
 import { PiHandWavingBold } from "react-icons/pi";
 import { GoPeople } from "react-icons/go";
+import { MdOutlineAccessTime, MdOutlineEmail } from "react-icons/md";
+import { IoIosLink } from "react-icons/io";
 
 const ProfileSideBar = ({ children }:{children: React.ReactNode}) => {
     return (
@@ -13,15 +15,28 @@ const ProfileSideBar = ({ children }:{children: React.ReactNode}) => {
                         <button type="button" className="absolute md:w-9 md:h-9 md:mt-60 md:ml-60 w-6 h-6 mt-48 ml-48 z-5 border rounded-full bg-white pl-2 text-lg"><PiHandWavingBold /></button>
                         <img src={ProfilePic} className="flex md:w-75 md:h-75 w-60 h-60 mb-5 rounded-full border border-gray-400"/>
                         <span className="font-semibold flex text-2xl">Samira Talanchi</span>
-                        <span className="flex text-gray-400 mb-3 text-xl">Samiratalanchi</span>
+                        <span className="flex text-gray-400 mb-3 text-xl">Samiratalanchi . she/her</span>
                         <span className="flex mb-4 text-md">Who loves developing...</span>
                         <button type="button" className="bg-gray-100 flex w-full mb-4 text-sm justify-center border border-gray-400 rounded py-1 font-semibold">Edit Profile</button>
-                        <div className="flex items-center gap-x-1 text-sm">
-                            <span className="text-gray-600 font-semibold"><GoPeople /></span>
+                        <div className="flex items-center gap-x-1 text-sm mb-5">
+                            <span className="text-gray-600 text-lg"><GoPeople /></span>
                             <span className="font-semibold">6</span>
                             <span className="text-gray-600">followers .</span>
                             <span className="font-semibold">4</span>
                             <span className="text-gray-600">following</span>
+                        </div>
+                        <div className="flex items-center gap-x-1 text-sm mb-2">
+                            <span className="text-gray-600 text-lg"><MdOutlineAccessTime /></span>
+                            <span>16:16</span>
+                            <span className="text-gray-600">(UTC +03:30)</span>
+                        </div>
+                        <div className="flex items-center gap-x-1 text-sm mb-2">
+                            <span className="text-gray-600 text-lg"><MdOutlineEmail /></span>
+                            <span>Samira73talanchi@gmail.com</span>
+                        </div>
+                        <div className="flex items-center gap-x-1 text-sm mb-2">
+                            <span className="text-gray-600 text-lg"><IoIosLink /></span>
+                            <a>https://instagram.com/codebysami</a>
                         </div>
                     </div>
                 </div>
