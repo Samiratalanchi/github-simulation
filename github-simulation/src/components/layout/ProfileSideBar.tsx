@@ -40,7 +40,7 @@ const ProfileSideBar = ({ children }:{children: React.ReactNode}) => {
                         </div>
                     </div>
                 </div>
-                <div className="flex items-center">
+                <div className="flex flex-col gap-y-3">
                     {children}
                 </div>
             </div>
