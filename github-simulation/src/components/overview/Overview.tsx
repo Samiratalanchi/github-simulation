@@ -1,4 +1,7 @@
+import { CiStar } from "react-icons/ci";
 import { FaCaretDown } from "react-icons/fa";
+import { RiGitRepositoryLine } from "react-icons/ri";
+import { RxDragHandleDots2 } from "react-icons/rx";
 
 const Overview = () => {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -6,15 +9,94 @@ const Overview = () => {
     return (
         <>
             <div className="pinned flex flex-col mb-3">
-                <span className="flex text-lg mb-3">Pinned</span>
+                <div className="flex flex-row justify-between items-center">
+                    <span className="flex text-lg mb-3">Pinned</span>
+                    <a href="" className="text-xs text-blue-700 hover:underline">Customize your pins</a>
+                </div>
                 <div className="flex flex-col gap-y-4">
-                    <div className="flex flex-row gap-x-4">
-                        <div className="flex border rounded border-gray-300 w-1/2 h-25"></div>
-                        <div className="flex border rounded border-gray-300 w-1/2 h-25"></div>
+                    <div className="flex flex-row gap-x-4 items-center">
+                        <div className="flex flex-col border rounded border-gray-300 w-1/2 p-4 gap-y-4">
+                            <div className="flex flex-row justify-between">
+                                <div className="flex flex-row items-center gap-x-2">
+                                    <span className="flex text-gray-600 text-lg"><RiGitRepositoryLine /></span>
+                                    <a className="flex text-blue-700 text-md hover:underline" href="">github-simulation</a>
+                                    <span className="flex text-gray-400 rounded-xl border text-xs px-1">Public</span>
+                                </div>
+                                <RxDragHandleDots2 className="flex items-center"/>
+                            </div>
+                            <div className="flex flex-row gap-x-5">
+                                <div className="flex flex-row items-center gap-x-2">
+                                    <span className="w-4 h-4 rounded-full bg-blue-500"></span>
+                                    <span className="text-gray-600 text-sm">TypeScript</span>
+                                </div>
+                                <div className="flex flex-row items-center gap-x-1">
+                                    <CiStar className="flex text-lg" />
+                                    <span className="text-gray-600 text-sm">1</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex flex-col border rounded border-gray-300 w-1/2 p-4 gap-y-4">
+                            <div className="flex flex-row justify-between">
+                                <div className="flex flex-row items-center gap-x-2">
+                                    <span className="flex text-gray-600 text-lg"><RiGitRepositoryLine /></span>
+                                    <a className="flex text-blue-700 text-md hover:underline" href="">Employe-Management</a>
+                                    <span className="flex text-gray-400 rounded-xl border text-xs px-1">Public</span>
+                                </div>
+                                <span className="flex items-center"><RxDragHandleDots2 /></span>
+                            </div>
+                            <div className="flex flex-row gap-x-5">
+                                <div className="flex flex-row items-center gap-x-2">
+                                    <span className="w-4 h-4 rounded-full bg-blue-500"></span>
+                                    <span className="text-gray-600 text-sm">TypeScript</span>
+                                </div>
+                                <div className="flex flex-row items-center gap-x-1">
+                                    <CiStar className="flex text-lg" />
+                                    <span className="text-gray-600 text-sm">1</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div className="flex flex-row gap-x-4">
-                        <div className="flex border rounded border-gray-300 w-1/2 h-25"></div>
-                        <div className="flex border rounded border-gray-300 w-1/2 h-25"></div>
+                    <div className="flex flex-col border rounded border-gray-300 w-1/2 p-4 gap-y-4">
+                            <div className="flex flex-row justify-between">
+                                <div className="flex flex-row items-center gap-x-2">
+                                    <span className="flex text-gray-600 text-lg"><RiGitRepositoryLine /></span>
+                                    <a className="flex text-blue-700 text-md hover:underline" href="">todo_list</a>
+                                    <span className="flex text-gray-400 rounded-xl border text-xs px-1">Public</span>
+                                </div>
+                                <span className="flex items-center"><RxDragHandleDots2 /></span>
+                            </div>
+                            <div className="flex flex-row gap-x-5">
+                                <div className="flex flex-row items-center gap-x-2">
+                                    <span className="w-4 h-4 rounded-full bg-blue-500"></span>
+                                    <span className="text-gray-600 text-sm">TypeScript</span>
+                                </div>
+                                <div className="flex flex-row items-center gap-x-1">
+                                    <CiStar className="flex text-lg" />
+                                    <span className="text-gray-600 text-sm">1</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex flex-col border rounded border-gray-300 w-1/2 p-4 gap-y-4">
+                            <div className="flex flex-row justify-between">
+                                <div className="flex flex-row items-center gap-x-2">
+                                    <span className="flex text-gray-600 text-lg"><RiGitRepositoryLine /></span>
+                                    <a className="flex text-blue-700 text-md hover:underline" href="">tic-tac-toe</a>
+                                    <span className="flex text-gray-400 rounded-xl border text-xs px-1">Public</span>
+                                </div>
+                                <span className="flex items-center"><RxDragHandleDots2 /></span>
+                            </div>
+                            <div className="flex flex-row gap-x-5">
+                                <div className="flex flex-row items-center gap-x-2">
+                                    <span className="w-4 h-4 rounded-full bg-yellow-200"></span>
+                                    <span className="text-gray-600 text-sm">JavaScript</span>
+                                </div>
+                                <div className="flex flex-row items-center gap-x-1">
+                                    <CiStar className="flex text-lg" />
+                                    <span className="text-gray-600 text-sm">1</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
