@@ -13,7 +13,7 @@ import { FaCaretDown } from "react-icons/fa";
 const HeaderLayout = ({ children }: { children: React.ReactNode }) => {
     return (
         <>
-            <div className="fixed inset-x-0 flex w-full flex-row">
+            <div className="fixed inset-x-0 flex w-full flex-row border-b border-gray-300">
                 <div className="flex flex-col grow gap-y-0 overflow-x-auto bg-gray-100 px-6">
                     <div className="flex h-14 shrink-0 items-center justify-between">
                         <div className="flex items-center">
@@ -60,34 +60,34 @@ const HeaderLayout = ({ children }: { children: React.ReactNode }) => {
                     </div>
                     <div className="flex h-10 shrink-0 items-center">
                         <ul className="list-none flex flex-row grow gap-x-4 text-[14px]">
-                            <li className="hover:bg-gray-200 active:border-b-3 active:border-orange-300 rounded-md p-2">
-                                <a className="flex items-center gap-x-2 ">
+                            <li className="hover:bg-gray-200 active:border-b-3 active:border-orange-300 rounded-md p-2 text-gray-600 active:text-black">
+                                <a className="flex items-center gap-x-2">
                                     <BsBook className="text-lg" />
                                     <span>Overview</span>
                                 </a>
                             </li>
-                            <li className="hover:bg-gray-200 active:border-b-3 active:border-orange-300 rounded-md p-2">
+                            <li className="hover:bg-gray-200 active:border-b-3 active:border-orange-300 rounded-md p-2 text-gray-600 active:text-black">
                                 <a className="flex items-center gap-x-2">
                                     <RiGitRepositoryLine className="text-lg" />
                                     <span>Repositories</span>
                                     <span className="bg-gray-200 rounded-md px-1">20</span>
                                 </a>
                             </li>
-                            <li className="hover:bg-gray-200 active:border-b-3 active:border-orange-300 rounded-md p-2">
+                            <li className="hover:bg-gray-200 active:border-b-3 active:border-orange-300 rounded-md p-2 text-gray-600 active:text-black">
                                 <a className="flex items-center gap-x-2">
                                     <VscGithubProject className="text-lg" />
                                     <span>Projects</span>
                                     <span className="bg-gray-200 rounded-md px-1">20</span>
                                 </a>
                             </li>
-                            <li className="hover:bg-gray-200 active:border-b-3 active:border-orange-300 rounded-md p-2">
+                            <li className="hover:bg-gray-200 active:border-b-3 active:border-orange-300 rounded-md p-2 text-gray-600 active:text-black">
                                 <a className="flex items-center gap-x-2">
                                     <GoPackage className="text-lg" />
                                     <span>Packages</span>
                                     <span className="bg-gray-200 rounded-md px-1">20</span>
                                 </a>
                             </li>
-                            <li className="hover:bg-gray-200 active:border-b-3 active:border-orange-300 rounded-md p-2">
+                            <li className="hover:bg-gray-200 active:border-b-3 active:border-orange-300 rounded-md p-2 text-gray-600 active:text-black">
                                 <a className="flex items-center gap-x-2">
                                     <CiStar className="text-lg" />
                                     <span>Stars</span>
