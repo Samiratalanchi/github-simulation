@@ -13,11 +13,11 @@ import { FiInbox, FiPlus } from "react-icons/fi";
 import { LuGitPullRequestArrow } from "react-icons/lu";
 import { FaCaretDown } from "react-icons/fa";
 
-const HeaderLayout = ({ children }: { children: React.ReactNode }) => {
+const HeaderLayout = ({ children, userProfileData}:{children: React.ReactNode, userProfileData:any[]}) => {
 
     const tabs = [
         { name: "Overview", icon: BsBook },
-        { name: "Repositories", icon: RiGitRepositoryLine, count: 20 },
+        { name: "Repositories", icon: RiGitRepositoryLine, count: userProfileData.public_repos },
         { name: "Projects", icon: VscGithubProject, count: 20 },
         { name: "Packages", icon: GoPackage, count: 20 },
         { name: "Stars", icon: CiStar, count: 20 },
@@ -38,7 +38,7 @@ const HeaderLayout = ({ children }: { children: React.ReactNode }) => {
                                 className="h-8 w-auto ml-6"
                                 src={logo}
                                 alt="Your Company" />
-                            <h1 className="ml-4 text-[13px] font-semibold">Samiratalanchi</h1>
+                            <h1 className="ml-4 text-[13px] font-semibold">{userProfileData.login}</h1>
                         </div>
                         <div className="flex items-center">
                             <ul className="list-none flex flex-row items-center gap-x-3 text-md">
@@ -66,7 +66,7 @@ const HeaderLayout = ({ children }: { children: React.ReactNode }) => {
                                 <li>
                                     <img
                                     className="h-8 w-auto rounded-full"
-                                    src={profilePic}
+                                    src={userProfileData.avatar_url}
                                     alt="profile pic" />
                                 </li>
                             </ul>
