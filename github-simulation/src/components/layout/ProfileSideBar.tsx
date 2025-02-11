@@ -1,5 +1,4 @@
 import React from "react";
-import { PiHandWavingBold } from "react-icons/pi";
 import { GoPeople } from "react-icons/go";
 import { MdOutlineAccessTime, MdOutlineEmail } from "react-icons/md";
 import { IoIosLink } from "react-icons/io";
@@ -16,7 +15,7 @@ const ProfileSideBar = ({ children, userProfileData}:{children: React.ReactNode,
 
     const offsetMinutes = now.getTimezoneOffset();
     const offsetHours = Math.floor(Math.abs(offsetMinutes) / 60);
-    const offsetSign = offsetMinutes > 0 ? "-" : "+"; // JavaScript returns negative for positive offsets
+    const offsetSign = offsetMinutes > 0 ? "-" : "+";
     const offsetFormatted = `UTC ${offsetSign}${String(offsetHours).padStart(2, '0')}:${String(Math.abs(offsetMinutes) % 60).padStart(2, '0')}`
 
     return (
@@ -24,7 +23,17 @@ const ProfileSideBar = ({ children, userProfileData}:{children: React.ReactNode,
             <div className="flex mx-auto mt-35 w-auto h-full flex-row gap-x-5">
                 <div className="flex items-center">
                     <div className="card flex-col items-center px-2 relative">
-                        <button type="button" className="absolute md:w-9 md:h-9 md:mt-60 md:ml-60 w-6 h-6 mt-48 ml-48 z-5 border rounded-full bg-white pl-2 text-lg"><PiHandWavingBold /></button>
+                        <button 
+                            type="button" 
+                            className="absolute flex flex-row items-center md:mt-60 md:ml-60 mt-48 ml-48 z-10 px-2 py-1 border border-gray-400 w-10 hover:w-25 h-10 rounded-full  bg-white  overflow-hidden transition-all duration-300 ease-in-out group "
+                            >
+                            <span className="flex text-[14px] transition-opacity duration-300 group-hover:opacity-100">
+                                👋
+                            </span>
+                            <span className="flex text-[10px] ml-2 w-15 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                Edit Status
+                            </span>
+                        </button>
                         <img src={userProfileData.avatar_url} className="flex md:w-75 md:h-75 w-60 h-60 mb-5 rounded-full border border-gray-400"/>
                         <span className="font-semibold flex text-2xl">{userProfileData.name}</span>
                         <span className="flex text-gray-400 mb-3 text-xl">{userProfileData.login} . she/her</span>

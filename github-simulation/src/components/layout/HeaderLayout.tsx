@@ -1,5 +1,4 @@
 import logo from "../../images/logo.png"
-import profilePic from "../../images/IMG_0080.jpg"
 
 import { useState } from "react";
 
