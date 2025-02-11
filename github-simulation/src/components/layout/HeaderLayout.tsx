@@ -2,7 +2,7 @@ import logo from "../../images/logo.png"
 
 import { useState } from "react";
 
-import { IoMdMenu } from "react-icons/io";
+import { IoMdClose, IoMdMenu } from "react-icons/io";
 import { RiGitRepositoryLine } from "react-icons/ri";
 import { VscGithubProject, VscIssues } from "react-icons/vsc";
 import { GoPackage } from "react-icons/go";
@@ -23,6 +23,7 @@ const HeaderLayout = ({ children, userProfileData}:{children: React.ReactNode, u
     ];
 
     const [activeTab, setActiveTab] = useState("Overview");
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
         <>
@@ -30,13 +31,38 @@ const HeaderLayout = ({ children, userProfileData}:{children: React.ReactNode, u
                 <div className="flex flex-col grow gap-y-0 overflow-x-auto bg-gray-100 px-6">
                     <div className="flex h-14 shrink-0 items-center justify-between">
                         <div className="flex items-center">
-                            <button type="button" className="-m-3 p-1 text-gray-400 border rounded-md">
+                            <button
+                                type="button"
+                                className="-m-3 p-1 text-gray-400 border rounded-md"
+                                data-collapse-toggle="navbar-hamburger"
+                                aria-controls="navbar-hamburger"
+                                aria-expanded={isMenuOpen}
+                                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            >
                                 <IoMdMenu className="text-xl"/>
                             </button>
+                            <div className={`absolute left-0 top-0 z-50 w-80 bg-gray-50 rounded-lg shadow-md transition-transform duration-300 ${
+                                    isMenuOpen ? "block" : "hidden"
+                                }`} id="navbar-hamburger">
+                                <div className="flex flex-col items-center">
+                                    <div className="flex flex-row justify-between items-center">
+                                        <img
+                                            className="h-8 w-auto ml-6"
+                                            src={logo}
+                                            alt="logo" />
+                                        <button
+                                            type="button"
+                                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                                            className="hover:bg-gray-300">
+                                            <IoMdClose />
+                                        </button>
+                                    </div>
+                                </div>
+                            </div> 
                             <img
                                 className="h-8 w-auto ml-6"
                                 src={logo}
-                                alt="Your Company" />
+                                alt="logo" />
                             <h1 className="ml-4 text-[13px] font-semibold">{userProfileData.login}</h1>
                         </div>
                         <div className="flex items-center">
