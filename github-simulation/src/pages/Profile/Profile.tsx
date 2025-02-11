@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 const Profile = () => {
 
-    const [userProfileData, setuserProfileData] = useState([]);
+    const [userProfileData, setUserProfileData] = useState<any>(null);
 
     useEffect(() => {
         fetch("https://api.github.com/users/samiratalanchi")
@@ -17,8 +17,11 @@ const Profile = () => {
             return response.json();
         })
         .then((data) => {
-            setuserProfileData(data);
+            setUserProfileData(data);
         })
+        .catch((error) => {
+            console.error(error);
+        });
     }, []);
 
     return (

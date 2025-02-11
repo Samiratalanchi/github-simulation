@@ -12,7 +12,7 @@ import { FiInbox, FiPlus } from "react-icons/fi";
 import { LuGitPullRequestArrow } from "react-icons/lu";
 import { FaCaretDown } from "react-icons/fa";
 
-const HeaderLayout = ({ children, userProfileData}:{children: React.ReactNode, userProfileData:any[]}) => {
+const HeaderLayout = ({ children, userProfileData}:{children: React.ReactNode, userProfileData:any}) => {
 
     const tabs = [
         { name: "Overview", icon: BsBook },

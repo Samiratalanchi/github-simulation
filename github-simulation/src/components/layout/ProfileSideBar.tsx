@@ -3,7 +3,7 @@ import { GoPeople } from "react-icons/go";
 import { MdOutlineAccessTime, MdOutlineEmail } from "react-icons/md";
 import { IoIosLink } from "react-icons/io";
 
-const ProfileSideBar = ({ children, userProfileData}:{children: React.ReactNode, userProfileData:any[]}) => {
+const ProfileSideBar = ({ children, userProfileData}:{children: React.ReactNode, userProfileData:any}) => {
     
     const now = new Date();
 
