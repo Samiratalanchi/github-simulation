@@ -13,7 +13,7 @@ import { LuGitPullRequestArrow } from "react-icons/lu";
 import { FaCaretDown } from "react-icons/fa";
 import { IoGiftOutline } from "react-icons/io5";
 
-const HeaderLayout = ({ children, userProfileData}:{children: React.ReactNode, userProfileData:any}) => {
+const HeaderLayout = ({ children, userProfileData, repoData}:{children: React.ReactNode, userProfileData:any, repoData:any}) => {
 
     const tabs = [
         { name: "Overview", icon: BsBook },
@@ -41,6 +41,16 @@ const HeaderLayout = ({ children, userProfileData}:{children: React.ReactNode, u
     const [activeTab, setActiveTab] = useState("Overview");
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+    const [repoShowCounter, setRepoShowCounter] = useState(5);
+
+    function repoCounter() {
+        if (repoData.length > 5) {
+            setRepoShowCounter(repoShowCounter + 5)
+        } else {
+            setRepoShowCounter(repoData.length);
+        }
+    }
+
     return (
         <>
             <div className="fixed inset-x-0 flex w-full flex-row border-b border-gray-300">
@@ -57,10 +67,10 @@ const HeaderLayout = ({ children, userProfileData}:{children: React.ReactNode, u
                             >
                                 <IoMdMenu className="text-xl"/>
                             </button>
-                            <div className={`absolute left-0 top-0 z-50 w-80 bg-white p-1 rounded-lg shadow-md transition-transform duration-300 ${
+                            <div className={`fixed inset-x-0 left-0 top-0 h-full z-1000 w-80 bg-white p-1 rounded-lg shadow-md transition-transform duration-300 ${
                                     isMenuOpen ? "block" : "hidden"
                                 }`} id="navbar-hamburger">
-                                <div className="flex flex-col">
+                                <div className="flex flex-col grow gap-y-0 overflow-y-auto max-h-screen">
                                     <div className="flex flex-row justify-between mb-3 items-center w-full p-3">
                                         <img
                                             className="h-8 w-auto"
@@ -75,13 +85,13 @@ const HeaderLayout = ({ children, userProfileData}:{children: React.ReactNode, u
                                     </div>
                                     <div className="flex flex-col items-center gap-y-0 px-3 pb-3 border-b border-gray-200">
                                         {navbarItems.part1.map((item) => (
-                                            <div className="flex flex-row text-gray-900 gap-x-2 p-1 w-full hover:bg-gray-100 items-center rounded">
+                                            <div className="flex flex-row cursor-pointer text-gray-900 gap-x-2 p-1 w-full hover:bg-gray-100 items-center rounded">
                                                 <span className="flex text-lg"><item.icon /></span>
                                                 <span className="flex text-sm">{item.name}</span>
                                             </div>
                                         ))}
                                     </div>
-                                    <div className="flex flex-col items-center gap-y-0 px-3 py-3 border-b border-gray-200">
+                                    <div className="flex flex-col items-center cursor-pointer gap-y-0 px-3 py-3 border-b border-gray-200">
                                         {navbarItems.part2.map((item) => (
                                             <div className="flex flex-row text-gray-900 gap-x-2 p-1 w-full hover:bg-gray-100 items-center rounded">
                                                 <span className="flex text-lg"><item.icon /></span>
@@ -89,8 +99,27 @@ const HeaderLayout = ({ children, userProfileData}:{children: React.ReactNode, u
                                             </div>
                                         ))}
                                     </div>
-                                    <div className="flex flex-col gap-y-0 px-3 py-3">
-                                        <span className="flex text-xs text-gray-400">Repositories</span>
+                                    <div className="flex flex-col gap-y-1 px-3 py-3">
+                                        <span className="flex text-xs text-gray-400 mb-2">Repositories</span>
+                                        {repoData.slice(0, repoShowCounter).map((repo, i) => (
+                                            <div
+                                                key={repo.full_name} 
+                                                className="flex flex-row gap-y-0 cursor-pointer text-gray-900 gap-x-2 p-1 w-full hover:bg-gray-100 items-center rounded"
+                                            >
+                                                <img
+                                                    className="h-6 w-auto rounded-full"
+                                                    src={userProfileData.avatar_url}
+                                                    alt="profile pic"
+                                                />
+                                                <span className="flex text-xs">{repo.full_name}</span>
+                                            </div>
+                                        ))}
+                                        <button
+                                            className={`flex text-xs text-gray-400 mt-1 cursor-pointer py-2 px-1 hover:bg-gray-100 rounded ${repoShowCounter === repoData.length ? "hidden" : "block"}`}
+                                            onClick={() => repoCounter()} 
+                                        >
+                                            Show more
+                                        </button>
                                     </div>
                                 </div>
                             </div> 

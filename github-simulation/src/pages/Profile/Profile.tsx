@@ -7,9 +7,9 @@ import { useState, useEffect } from "react";
 const Profile = () => {
 
     const [userProfileData, setUserProfileData] = useState<any>(null);
+    const [userProfileDataLoading, setUserProfileDataLoading] = useState(true);
 
-
-    const [loading, setLoading] = useState(true);
+    const [repoData, setRepoData] = useState<any>(null);
 
     useEffect(() => {
         fetch("https://api.github.com/users/samiratalanchi")
@@ -21,20 +21,35 @@ const Profile = () => {
             })
             .then((data) => {
                 setUserProfileData(data);
-                setLoading(false);
+                setUserProfileDataLoading(false);
             })
             .catch((error) => {
                 console.error(error);
-                setLoading(false);
+                setUserProfileDataLoading(false);
             });
     }, []);
 
-    if (loading) return <div className="text-center mt-10">Loading...</div>;
+    useEffect(() => {
+        fetch("https://api.github.com/users/Samiratalanchi/repos")
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.json();
+            })
+            .then((data) => {
+                setRepoData(data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, []);
+
+    if (userProfileDataLoading) return <div className="text-center mt-10">Loading...</div>;
     if (!userProfileData) return <div className="text-center mt-10">No user data found</div>;
 
-
     return (
-        <HeaderLayout userProfileData={userProfileData}>
+        <HeaderLayout userProfileData={userProfileData} repoData={repoData} >
             <ProfileSideBar userProfileData={userProfileData}>
                 <Overview />
             </ProfileSideBar>

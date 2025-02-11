@@ -20,12 +20,12 @@ const ProfileSideBar = ({ children, userProfileData}:{children: React.ReactNode,
 
     return (
         <>
-            <div className="flex mx-auto mt-35 w-auto h-full flex-row gap-x-5">
+            <div className="flex mx-auto mt-35 w-auto h-full flex-row gap-x-5 -z-1">
                 <div className="flex items-center">
                     <div className="card flex-col items-center px-2 relative">
                         <button 
                             type="button" 
-                            className="absolute flex flex-row items-center md:mt-60 md:ml-60 mt-48 ml-48 z-10 px-2 py-1 border border-gray-400 w-10 hover:w-25 h-10 rounded-full  bg-white  overflow-hidden transition-all duration-300 ease-in-out group "
+                            className="absolute cursor-pointer flex flex-row items-center md:mt-60 md:ml-60 mt-48 ml-48 z-100 px-2 py-1 border border-gray-400 w-10 hover:w-25 h-10 rounded-full  bg-white  overflow-hidden transition-all duration-300 ease-in-out group "
                             >
                             <span className="flex text-[14px] transition-opacity duration-300 group-hover:opacity-100">
                                 👋
