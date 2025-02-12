@@ -12,6 +12,8 @@ const Profile = () => {
     const [repoData, setRepoData] = useState<any>(null);
     const [repoDataLoading, setRepoDataLoading] = useState(true);
 
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
     useEffect(() => {
         fetch("https://api.github.com/users/samiratalanchi")
             .then((response) => {
@@ -53,8 +55,13 @@ const Profile = () => {
     
 
     return (
-        <HeaderLayout userProfileData={userProfileData} repoData={repoData} >
-            <ProfileSideBar userProfileData={userProfileData}>
+        <HeaderLayout
+            userProfileData={userProfileData}
+            repoData={repoData}
+            isMenuOpen={isMenuOpen}
+            setIsMenuOpen={setIsMenuOpen}
+        >
+            <ProfileSideBar userProfileData={userProfileData} isMenuOpen={isMenuOpen}>
                 <Overview />
             </ProfileSideBar>
         </HeaderLayout>

@@ -13,7 +13,15 @@ import { LuGitPullRequestArrow } from "react-icons/lu";
 import { FaCaretDown } from "react-icons/fa";
 import { IoGiftOutline } from "react-icons/io5";
 
-const HeaderLayout = ({ children, userProfileData, repoData}:{children: React.ReactNode, userProfileData:any, repoData:any}) => {
+interface HeaderLayoutProps {
+    children: React.ReactNode;
+    userProfileData: any;
+    repoData: any;
+    isMenuOpen: boolean;
+    setIsMenuOpen: (state: boolean) => void;
+}
+
+const HeaderLayout = ({ children, userProfileData, repoData, isMenuOpen, setIsMenuOpen} : HeaderLayoutProps ) => {
 
     const tabs = [
         { name: "Overview", icon: BsBook },
@@ -39,7 +47,6 @@ const HeaderLayout = ({ children, userProfileData, repoData}:{children: React.Re
     };
 
     const [activeTab, setActiveTab] = useState("Overview");
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const [repoShowCounter, setRepoShowCounter] = useState(5);
 
@@ -63,12 +70,18 @@ const HeaderLayout = ({ children, userProfileData, repoData}:{children: React.Re
                                 data-collapse-toggle="navbar-hamburger"
                                 aria-controls="navbar-hamburger"
                                 aria-expanded={isMenuOpen}
-                                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                                onClick={() => setIsMenuOpen(true)}
                             >
                                 <IoMdMenu className="text-xl"/>
                             </button>
-                            <div className={`fixed inset-x-0 left-0 top-0 h-full z-1000 w-80 bg-white p-1 rounded-lg shadow-md transition-transform duration-300 ${
-                                    isMenuOpen ? "block" : "hidden"
+                            {isMenuOpen && (
+                                <div
+                                    className="fixed inset-0 bg-black opacity-30 z-[999]"
+                                    onClick={() => setIsMenuOpen(false)}
+                                ></div>
+                            )}
+                            <div className={`fixed inset-y-0 left-0 top-0 z-1000 w-80 bg-white p-4 rounded-lg shadow-md transition-transform duration-300 ${
+                                    isMenuOpen ? "translate-x-0" : "-translate-x-full"
                                 }`} id="navbar-hamburger">
                                 <div className="flex flex-col grow gap-y-0 overflow-y-auto max-h-screen">
                                     <div className="flex flex-row justify-between mb-3 items-center w-full p-3">
@@ -78,7 +91,7 @@ const HeaderLayout = ({ children, userProfileData, repoData}:{children: React.Re
                                             alt="logo" />
                                         <button
                                             type="button"
-                                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                                            onClick={() => setIsMenuOpen(false)}
                                             className="hover:bg-gray-200 rounded-md p-2 text-gray-600">
                                             <IoMdClose />
                                         </button>

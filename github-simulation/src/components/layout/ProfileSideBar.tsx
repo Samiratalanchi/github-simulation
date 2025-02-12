@@ -3,7 +3,13 @@ import { GoPeople } from "react-icons/go";
 import { MdOutlineAccessTime, MdOutlineEmail } from "react-icons/md";
 import { IoIosLink } from "react-icons/io";
 
-const ProfileSideBar = ({ children, userProfileData}:{children: React.ReactNode, userProfileData:any}) => {
+interface ProfileSidebarProps {
+    children: React.ReactNode;
+    userProfileData: any;
+    isMenuOpen: boolean;
+}
+
+const ProfileSideBar = ({ children, userProfileData, isMenuOpen}: ProfileSidebarProps) => {
     
     const now = new Date();
 
@@ -20,12 +26,12 @@ const ProfileSideBar = ({ children, userProfileData}:{children: React.ReactNode,
 
     return (
         <>
-            <div className="flex mx-auto mt-35 w-auto h-full flex-row gap-x-5 -z-1">
+            <div className="flex mx-auto mt-35 w-auto h-full flex-row gap-x-5">
                 <div className="flex items-center">
-                    <div className="card flex-col items-center px-2 relative">
+                    <div className="card flex-col items-center px-2">
                         <button 
                             type="button" 
-                            className="absolute cursor-pointer flex flex-row items-center md:mt-60 md:ml-60 mt-48 ml-48 z-100 px-2 py-1 border border-gray-400 w-10 hover:w-25 h-10 rounded-full  bg-white  overflow-hidden transition-all duration-300 ease-in-out group "
+                            className={`${isMenuOpen ? "-z-1" : "z-2"} absolute cursor-pointer flex flex-row items-center md:mt-60 md:ml-60 mt-48 ml-48 px-2 py-1 border border-gray-400 w-10 hover:w-25 h-10 rounded-full  bg-white  overflow-hidden transition-all duration-300 ease-in-out group `}
                             >
                             <span className="flex text-[14px] transition-opacity duration-300 group-hover:opacity-100">
                                 👋
@@ -34,7 +40,7 @@ const ProfileSideBar = ({ children, userProfileData}:{children: React.ReactNode,
                                 Edit Status
                             </span>
                         </button>
-                        <img src={userProfileData.avatar_url} className="flex md:w-75 md:h-75 w-60 h-60 mb-5 rounded-full border border-gray-400"/>
+                        <img src={userProfileData.avatar_url} className={`${isMenuOpen ? "-z-10" : "z-1"} relative flex md:w-75 md:h-75 w-60 h-60 mb-5 rounded-full border border-gray-400`}/>
                         <span className="font-semibold flex text-2xl">{userProfileData.name}</span>
                         <span className="flex text-gray-400 mb-3 text-xl">{userProfileData.login} . she/her</span>
                         <span className="flex mb-4 text-md">{userProfileData.bio}</span>
