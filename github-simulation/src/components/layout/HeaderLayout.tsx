@@ -101,19 +101,24 @@ const HeaderLayout = ({ children, userProfileData, repoData}:{children: React.Re
                                     </div>
                                     <div className="flex flex-col gap-y-1 px-3 py-3 mb-7">
                                         <span className="flex text-xs text-gray-400 mb-2">Repositories</span>
-                                        {repoData.slice(0, repoShowCounter).map((repo:any, i:number) => (
-                                            <div
+                                        {repoData && repoData.length > 0 ? (
+                                            repoData.slice(0, repoShowCounter).map((repo:any, i:number) => (
+                                                <div
                                                 key={i} 
                                                 className="flex flex-row gap-y-0 cursor-pointer text-gray-900 gap-x-2 p-1 w-full hover:bg-gray-100 items-center rounded"
-                                            >
-                                                <img
-                                                    className="h-6 w-auto rounded-full"
-                                                    src={userProfileData.avatar_url}
-                                                    alt="profile pic"
-                                                />
-                                                <span className="flex text-xs">{repo.full_name}</span>
-                                            </div>
-                                        ))}
+                                                >
+                                                    <img
+                                                        className="h-6 w-auto rounded-full"
+                                                        src={userProfileData.avatar_url}
+                                                        alt="profile pic"
+                                                    />
+                                                    <span className="flex text-xs">{repo.full_name}</span>
+                                                </div>
+                                            ))
+                                            ) : (
+                                                <p>No repositories available</p>
+                                            )
+                                        }
                                         <button
                                             className={`flex text-xs text-gray-400 mt-1 cursor-pointer py-2 px-1 hover:bg-gray-100 rounded ${repoShowCounter === repoData.length ? "hidden" : "block"}`}
                                             onClick={() => repoCounter()} 

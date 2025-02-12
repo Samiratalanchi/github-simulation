@@ -10,6 +10,7 @@ const Profile = () => {
     const [userProfileDataLoading, setUserProfileDataLoading] = useState(true);
 
     const [repoData, setRepoData] = useState<any>(null);
+    const [repoDataLoading, setRepoDataLoading] = useState(true);
 
     useEffect(() => {
         fetch("https://api.github.com/users/samiratalanchi")
@@ -39,14 +40,17 @@ const Profile = () => {
             })
             .then((data) => {
                 setRepoData(data);
+                setRepoDataLoading(false);
             })
             .catch((error) => {
                 console.error(error);
+                setRepoDataLoading(false);
             });
     }, []);
 
-    if (userProfileDataLoading) return <div className="text-center mt-10">Loading...</div>;
+    if (userProfileDataLoading || repoDataLoading) return <div className="text-center mt-10">Loading...</div>;
     if (!userProfileData) return <div className="text-center mt-10">No user data found</div>;
+    
 
     return (
         <HeaderLayout userProfileData={userProfileData} repoData={repoData} >
