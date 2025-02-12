@@ -99,11 +99,11 @@ const HeaderLayout = ({ children, userProfileData, repoData}:{children: React.Re
                                             </div>
                                         ))}
                                     </div>
-                                    <div className="flex flex-col gap-y-1 px-3 py-3">
+                                    <div className="flex flex-col gap-y-1 px-3 py-3 mb-7">
                                         <span className="flex text-xs text-gray-400 mb-2">Repositories</span>
-                                        {repoData.slice(0, repoShowCounter).map((repo, i) => (
+                                        {repoData.slice(0, repoShowCounter).map((repo:any, i:number) => (
                                             <div
-                                                key={repo.full_name} 
+                                                key={i} 
                                                 className="flex flex-row gap-y-0 cursor-pointer text-gray-900 gap-x-2 p-1 w-full hover:bg-gray-100 items-center rounded"
                                             >
                                                 <img
