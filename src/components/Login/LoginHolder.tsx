@@ -37,7 +37,7 @@ const LoginHolder = () => {
             localStorage.setItem("repos", JSON.stringify(repoData))
             setSuccess(1)
             setTimeout(() => {
-                navigate("/profile")
+                navigate(`/profile/${triggerUserName}`)
             },4000)
         } else if (!status && triggerUserName) {
             setSuccess(3);
