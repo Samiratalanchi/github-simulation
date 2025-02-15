@@ -42,8 +42,8 @@ const ProfileSideBar = ({ children, userProfileData, isMenuOpen}: ProfileSidebar
                         </button>
                         <img src={userProfileData.avatar_url} className={`${isMenuOpen ? "-z-10" : "z-1"} relative flex md:w-75 md:h-75 w-60 h-60 mb-5 rounded-full border border-gray-400`}/>
                         <span className="font-semibold flex text-2xl">{userProfileData.name}</span>
-                        <span className="flex text-gray-400 mb-3 text-xl">{userProfileData.login} . she/her</span>
-                        <span className="flex mb-4 text-md">{userProfileData.bio}</span>
+                        <span className="flex text-gray-400 mb-3 text-xl">{userProfileData.login}</span>
+                        <span className="flex mb-4 text-md text-wrap max-w-80">{userProfileData.bio}</span>
                         <button type="button" className="bg-gray-100 flex w-full mb-4 text-sm justify-center border border-gray-400 rounded py-1 font-semibold">Edit Profile</button>
                         <div className="flex items-center gap-x-1 text-sm mb-5">
                             <span className="text-gray-600 text-lg"><GoPeople /></span>
