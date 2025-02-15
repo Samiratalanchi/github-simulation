@@ -4,11 +4,13 @@ import logo from "../../images/logo.png"
 import LoginForm from "./LoginForm";
 import useUserProfileData from "../../services/api/users"
 import useReposData from "../../services/api/repos";
+import Alert from "../common/alert/Alert";
 
 const LoginHolder = () => {
 
     const [userName, setUserName] = useState<string>("");
     const [triggerUserName, setTriggerUserName] = useState<string>("");
+    const [success, setSuccess] = useState<number >(0);
 
     const navigate = useNavigate();
 
@@ -21,8 +23,8 @@ const LoginHolder = () => {
     );
 
     const submitForm = () => {
-        if (!userName) {
-            alert("Please enter a username");
+        if (!userName.trim()) {
+            setSuccess(2);
             return;
         }
         setTriggerUserName(userName);
@@ -33,11 +35,12 @@ const LoginHolder = () => {
             localStorage.clear();
             localStorage.setItem("user", JSON.stringify(userProfileData))
             localStorage.setItem("repos", JSON.stringify(repoData))
+            setSuccess(1)
             setTimeout(() => {
                 navigate("/profile")
             },4000)
         } else if (!status && triggerUserName) {
-            console.log("User not found");
+            setSuccess(3);
         }
     }, [status, userProfileData, triggerUserName, navigate]);
 
@@ -51,9 +54,13 @@ const LoginHolder = () => {
                 />
                 <h2 className="mt-6 text-center text-2xl leading-9 tracking-tight text-gray-900">
                     Login to GitHub
-                </h2>
+                </h2>  
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-[360px]">
+                    
                     <LoginForm setUserName={setUserName} submitForm={submitForm} />
+                    {success === 1 && <Alert message="Login Successful"/>}
+                    {success === 3 && <Alert error={true} title="Username is Wrong"/>}
+                    {success === 2 && <Alert error={true} title="Please enter a username"/>}
                 </div>
             </div>
         </div>

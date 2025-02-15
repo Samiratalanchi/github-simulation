@@ -1,6 +1,6 @@
 import React from "react";
 import { GoPeople } from "react-icons/go";
-import { MdOutlineAccessTime, MdOutlineEmail } from "react-icons/md";
+import { MdOutlineAccessTime } from "react-icons/md";
 import { IoIosLink } from "react-icons/io";
 
 interface ProfileSidebarProps {
