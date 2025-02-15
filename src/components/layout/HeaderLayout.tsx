@@ -23,6 +23,9 @@ interface HeaderLayoutProps {
 
 const HeaderLayout = ({ children, userProfileData, repoData, isMenuOpen, setIsMenuOpen} : HeaderLayoutProps ) => {
 
+    console.log("repoData",repoData);
+    console.log("userdata",userProfileData);
+
     const tabs = [
         { name: "Overview", icon: BsBook },
         { name: "Repositories", icon: RiGitRepositoryLine, count: userProfileData.public_repos },
@@ -77,7 +80,10 @@ const HeaderLayout = ({ children, userProfileData, repoData, isMenuOpen, setIsMe
                             {isMenuOpen && (
                                 <div
                                     className="fixed inset-0 bg-black opacity-30 z-[999]"
-                                    onClick={() => setIsMenuOpen(false)}
+                                    onClick={() => {
+                                        setIsMenuOpen(false);
+                                        setRepoShowCounter(5)
+                                    }} 
                                 ></div>
                             )}
                             <div className={`fixed inset-y-0 left-0 top-0 z-1000 w-80 bg-white p-4 rounded-lg shadow-md transition-transform duration-300 ${
@@ -91,7 +97,10 @@ const HeaderLayout = ({ children, userProfileData, repoData, isMenuOpen, setIsMe
                                             alt="logo" />
                                         <button
                                             type="button"
-                                            onClick={() => setIsMenuOpen(false)}
+                                            onClick={() => {
+                                                setIsMenuOpen(false);
+                                                setRepoShowCounter(5)
+                                            }} 
                                             className="hover:bg-gray-200 rounded-md p-2 text-gray-600">
                                             <IoMdClose />
                                         </button>

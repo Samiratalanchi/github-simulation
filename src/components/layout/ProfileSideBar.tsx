@@ -58,10 +58,6 @@ const ProfileSideBar = ({ children, userProfileData, isMenuOpen}: ProfileSidebar
                             <span className="text-gray-600">({offsetFormatted})</span>
                         </div>
                         <div className="flex items-center gap-x-1 text-sm mb-2">
-                            <span className="text-gray-600 text-lg"><MdOutlineEmail /></span>
-                            <span>Samira73talanchi@gmail.com</span>
-                        </div>
-                        <div className="flex items-center gap-x-1 text-sm mb-2">
                             <span className="text-gray-600 text-lg"><IoIosLink /></span>
                             <a>{userProfileData.blog}</a>
                         </div>
