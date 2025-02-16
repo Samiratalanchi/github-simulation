@@ -11,8 +11,7 @@ const useReposData = (userName:string) => {
             if (!response.ok) {
                 throw new Error('Failed to fetch data');
             }
-            return await response.json();
-        
+        return await response.json();
         } catch (error) {
             console.error('Error fetching data:', error);
             throw error;
@@ -33,6 +32,9 @@ const useReposData = (userName:string) => {
         };
         if (userName) {
             loadData();
+        } else {
+            setRepoData(null);
+            setRepoDataLoading(false);
         }
     }, [userName]);
 

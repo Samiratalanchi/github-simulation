@@ -4,14 +4,14 @@ const useUserProfileData = (userName:string) => {
     const [userProfileData, setUserProfileData] = useState(null);
     const [userProfileDataLoading, setUserProfileDataLoading] = useState(true);
     const [status,setStatus] = useState(false)
+
     const fetchUserData = async () => {
         try {
             const response = await fetch(`https://api.github.com/users/${userName}`);
         if (!response.ok) {
             throw new Error('Failed to fetch data');
         }
-            return await response.json();
-        
+        return await response.json();
         } catch (error) {
             console.error('Error fetching data:', error);
             throw error;
@@ -34,6 +34,10 @@ const useUserProfileData = (userName:string) => {
         };
         if (userName) {
             loadData();
+        } else {
+            setUserProfileData(null);
+            setStatus(false);
+            setUserProfileDataLoading(false);
         }
     }, [userName]);
 

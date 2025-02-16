@@ -11,18 +11,11 @@ const LoginHolder = () => {
     const [userName, setUserName] = useState<string>("");
     const [triggerUserName, setTriggerUserName] = useState<string>("");
     const [success, setSuccess] = useState<number >(0);
-
     const navigate = useNavigate();
 
-    const { userProfileData, status } = useUserProfileData(
-        triggerUserName
-    );
+    const { userProfileData, status } = useUserProfileData(triggerUserName);
     
-    const { repoData } = useReposData(
-        triggerUserName
-    );
-
-    
+    const { repoData } = useReposData(triggerUserName);
 
     const submitForm = () => {
         if (!userName.trim()) {
@@ -30,7 +23,15 @@ const LoginHolder = () => {
             return;
         }
         setTriggerUserName(userName);
+        setSuccess(0);
     };
+
+    useEffect(() => {
+        localStorage.clear();
+        setUserName("");
+        setTriggerUserName(""); 
+        setSuccess(0); 
+    }, []);
     
     useEffect(() => {
         if (status && repoData) {
@@ -40,11 +41,14 @@ const LoginHolder = () => {
             setSuccess(1)
             setTimeout(() => {
                 navigate(`/profile/${triggerUserName}`)
-            },4000)
-        } else if (!status && triggerUserName) {
-            setSuccess(3);
+            },2000)
+            setTimeout(() => {
+                setUserName("");
+                setTriggerUserName(""); 
+                setSuccess(0);
+            },5000)
         }
-    }, [status, userProfileData, triggerUserName, navigate]);
+    }, [status, userProfileData, repoData, triggerUserName, navigate]);
 
     return (
         <div className="flex flex-col justify-center items-center h-full py-12 sm:px-3 lg:px-6">
