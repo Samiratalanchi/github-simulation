@@ -5,26 +5,26 @@ import { useState } from "react";
 import { IoMdClose, IoMdMenu } from "react-icons/io";
 import { RiGitRepositoryLine } from "react-icons/ri";
 import { VscGithubProject, VscIssues } from "react-icons/vsc";
-import { GoCodespaces, GoCommentDiscussion, GoHome, GoPackage, GoTelescope } from "react-icons/go";
+import { GoArrowSwitch, GoCodespaces, GoCommentDiscussion, GoHome, GoPackage, GoTelescope } from "react-icons/go";
 import { CiStar } from "react-icons/ci";
 import { BsBook } from "react-icons/bs";
 import { FiInbox, FiPlus } from "react-icons/fi";
 import { LuGitPullRequestArrow } from "react-icons/lu";
 import { FaCaretDown } from "react-icons/fa";
 import { IoGiftOutline } from "react-icons/io5";
+import { MdOutlineExitToApp } from "react-icons/md";
 
 interface HeaderLayoutProps {
     children: React.ReactNode;
     userProfileData: any;
     repoData: any;
-    isMenuOpen: boolean;
-    setIsMenuOpen: (state: boolean) => void;
+    isLeftSideMenuOpen: boolean;
+    setIsLeftSideMenuOpen: (state: boolean) => void;
+    isRightSideMenuOpen: boolean;
+    setIsRightSideMenuOpen: (state: boolean) => void;
 }
 
-const HeaderLayout = ({ children, userProfileData, repoData, isMenuOpen, setIsMenuOpen} : HeaderLayoutProps ) => {
-
-    console.log("repoData",repoData);
-    console.log("userdata",userProfileData);
+const HeaderLayout = ({ children, userProfileData, repoData, isLeftSideMenuOpen, setIsLeftSideMenuOpen, isRightSideMenuOpen, setIsRightSideMenuOpen} : HeaderLayoutProps ) => {
 
     const tabs = [
         { name: "Overview", icon: BsBook },
@@ -61,6 +61,8 @@ const HeaderLayout = ({ children, userProfileData, repoData, isMenuOpen, setIsMe
         }
     }
 
+    console.log("headerlayout",isLeftSideMenuOpen,isRightSideMenuOpen);
+
     return (
         <>
             <div className="fixed inset-x-0 flex w-full flex-row border-b border-gray-300">
@@ -70,25 +72,32 @@ const HeaderLayout = ({ children, userProfileData, repoData, isMenuOpen, setIsMe
                             <button
                                 type="button"
                                 className="-m-3 p-1 text-gray-400 border rounded-md"
-                                data-collapse-toggle="navbar-hamburger"
-                                aria-controls="navbar-hamburger"
-                                aria-expanded={isMenuOpen}
-                                onClick={() => setIsMenuOpen(true)}
+                                data-collapse-toggle="leftSideMenu"
+                                aria-controls="leftSideMenu"
+                                aria-expanded={isLeftSideMenuOpen}
+                                onClick={() => {
+                                    setIsLeftSideMenuOpen(true);
+                                    if (isRightSideMenuOpen) setIsRightSideMenuOpen(false); // Only close if open
+                                }}
                             >
                                 <IoMdMenu className="text-xl"/>
                             </button>
-                            {isMenuOpen && (
+                            {(isLeftSideMenuOpen || isRightSideMenuOpen) && (
                                 <div
                                     className="fixed inset-0 bg-black opacity-30 z-[999]"
                                     onClick={() => {
-                                        setIsMenuOpen(false);
-                                        setRepoShowCounter(5)
+                                        if (isLeftSideMenuOpen) {
+                                            setIsLeftSideMenuOpen(false);
+                                            setRepoShowCounter(5)
+                                        } else {
+                                            setIsRightSideMenuOpen(false);
+                                        }
                                     }} 
                                 ></div>
                             )}
                             <div className={`fixed inset-y-0 left-0 top-0 z-1000 w-80 bg-white p-4 rounded-lg shadow-md transition-transform duration-300 ${
-                                    isMenuOpen ? "translate-x-0" : "-translate-x-full"
-                                }`} id="navbar-hamburger">
+                                    isLeftSideMenuOpen ? "translate-x-0" : "-translate-x-full"
+                                }`} id="leftSideMenu">
                                 <div className="flex flex-col grow gap-y-0 overflow-y-auto max-h-screen">
                                     <div className="flex flex-row justify-between mb-3 items-center w-full p-3">
                                         <img
@@ -98,7 +107,7 @@ const HeaderLayout = ({ children, userProfileData, repoData, isMenuOpen, setIsMe
                                         <button
                                             type="button"
                                             onClick={() => {
-                                                setIsMenuOpen(false);
+                                                setIsLeftSideMenuOpen(false);
                                                 setRepoShowCounter(5)
                                             }} 
                                             className="hover:bg-gray-200 rounded-md p-2 text-gray-600">
@@ -150,6 +159,45 @@ const HeaderLayout = ({ children, userProfileData, repoData, isMenuOpen, setIsMe
                                     </div>
                                 </div>
                             </div> 
+                            <div className={`fixed inset-y-0 right-0 top-0 z-1001 w-80 bg-white p-4 rounded-lg shadow-md transition-transform duration-300 ${
+                                    isRightSideMenuOpen ? "translate-x-0" : "translate-x-full"
+                                }`} id="rightSideMenu">
+                                <div className="flex flex-col grow gap-y-0 overflow-y-auto max-h-screen">
+                                    <div className="flex flex-row justify-between mb-3 items-center w-full p-3">
+                                        <div className="flex flex-row items-center gap-x-2">
+                                            <img
+                                            className="flex h-9 w-auto rounded-full"
+                                            src={userProfileData.avatar_url}
+                                            alt="profile pic"
+                                            />
+                                            <div className="flex flex-col gap-y-0">
+                                                <span className="text-sm">{userProfileData.login}</span>
+                                                <span className="text-sm text-gray-400">{userProfileData.name}</span>
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-row">
+                                            <button
+                                                className="hover:bg-gray-200 rounded-md p-2 text-gray-600">
+                                                <GoArrowSwitch />
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={() => {
+                                                    setIsRightSideMenuOpen(false);
+                                                }} 
+                                                className="hover:bg-gray-200 rounded-md p-2 text-gray-600">
+                                                <IoMdClose />
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-col items-center gap-y-0 p-3 border-t border-gray-200">
+                                        <div className="flex flex-row cursor-pointer text-gray-900 gap-x-2 p-1 w-full hover:bg-gray-100 items-center rounded">
+                                            <span className="flex text-lg"><MdOutlineExitToApp /></span>
+                                            <span className="flex text-sm">Log out</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
                             <img
                                 className="h-8 w-auto ml-6"
                                 src={logo}
@@ -180,12 +228,25 @@ const HeaderLayout = ({ children, userProfileData, repoData, isMenuOpen, setIsMe
                                     </button>
                                 </li>
                                 <li>
-                                    <img
-                                    className="h-8 w-auto rounded-full"
-                                    src={userProfileData.avatar_url}
-                                    alt="profile pic" />
+                                    <button
+                                        type="button"
+                                        className="items-center pt-2"
+                                        data-collapse-toggle="rightSideMenu"
+                                        aria-controls="rightSideMenu"
+                                        aria-expanded={isRightSideMenuOpen}
+                                        onClick={() => {
+                                            setIsRightSideMenuOpen(true);
+                                            if (isLeftSideMenuOpen) setIsLeftSideMenuOpen(false);
+                                        }}
+                                        >
+                                            <img
+                                                className="h-8 w-auto rounded-full"
+                                                src={userProfileData.avatar_url}
+                                                alt="profile pic" />
+                                    </button>
                                 </li>
                             </ul>
+                            
                         </div>
                     </div>
                     <div className="flex shrink-0 items-center">
