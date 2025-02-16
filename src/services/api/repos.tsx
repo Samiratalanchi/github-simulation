@@ -8,9 +8,9 @@ const useReposData = (userName:string) => {
     const fetchRepoData = async () => {
         try {
             const response = await fetch(`https://api.github.com/users/${userName}/repos`);
-        if (!response.ok) {
-            throw new Error('Failed to fetch data');
-        }
+            if (!response.ok) {
+                throw new Error('Failed to fetch data');
+            }
             return await response.json();
         
         } catch (error) {

@@ -22,6 +22,8 @@ const LoginHolder = () => {
         triggerUserName
     );
 
+    
+
     const submitForm = () => {
         if (!userName.trim()) {
             setSuccess(2);
@@ -31,7 +33,7 @@ const LoginHolder = () => {
     };
     
     useEffect(() => {
-        if (status) {
+        if (status && repoData) {
             localStorage.clear();
             localStorage.setItem("user", JSON.stringify(userProfileData))
             localStorage.setItem("repos", JSON.stringify(repoData))

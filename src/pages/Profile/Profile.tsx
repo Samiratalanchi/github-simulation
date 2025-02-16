@@ -6,7 +6,6 @@ import { useState } from "react";
 
 const Profile = () => {
 
-
     const userProfileData = JSON.parse(localStorage.getItem("user") || "null")
     const repoData = JSON.parse(localStorage.getItem("repos") || "null")
 
