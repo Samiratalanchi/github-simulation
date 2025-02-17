@@ -12,7 +12,7 @@ const Modal = ({ isModalOpen, onCloseModal, modalTitle, children}: IRepoModalPro
 
     return (
         <div onClick={onCloseModal} className="fixed inset-0 bg-black/30 flex justify-center items-center z-50">
-            <div className="bg-white rounded-lg shadow-lg w-120 p-6 relative">
+            <div onClick={(e) => e.stopPropagation()}  className="bg-white rounded-lg shadow-lg w-120 h-160 p-6 relative overflow-y-auto max-h-screen">
                 <div className="flex justify-between items-center">
                     <h2 className="text-lg font-semibold">{modalTitle}</h2>
                     <button

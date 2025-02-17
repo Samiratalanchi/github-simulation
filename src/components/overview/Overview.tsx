@@ -14,6 +14,7 @@ import RepoModal from "../../modal/repoModal/RepoModal";
     const [activeYearButton, setActiveYearButton] = useState("2025");
 
     const [isModalOpen, setModalOpen] = useState(false);
+    const [selectedRepos, setSelectedRepos] = useState<string[]>([]);
 
     return (
         <>
@@ -22,7 +23,7 @@ import RepoModal from "../../modal/repoModal/RepoModal";
                     <span className="flex text-lg mb-3">Pinned</span>
                     <button type="button" onClick={() => setModalOpen(true)} className="text-xs text-blue-700 hover:underline">Customize your pins</button>
                 </div>
-                <RepoModal isModalOpen={isModalOpen} onCloseModal={()=> setModalOpen(false) } modalTitle="Edit pinned items" />
+                <RepoModal isModalOpen={isModalOpen} onCloseModal={()=> setModalOpen(false) } modalTitle="Edit pinned items" selectedRepos={selectedRepos} setSelectedRepos={setSelectedRepos} />
                 <div className="flex flex-col gap-y-4">
                     <div className="flex flex-row gap-x-4 items-center">
                         <div className="flex flex-col border rounded border-gray-300 w-1/2 p-4 gap-y-4">
