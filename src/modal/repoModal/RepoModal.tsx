@@ -4,6 +4,7 @@ import { CiStar } from "react-icons/ci";
 import { useEffect, useState } from "react";
 
 interface IRepoModalProps {
+    repoData: any;
     isModalOpen: boolean;
     onCloseModal: () => void;
     modalTitle: string;
@@ -11,9 +12,7 @@ interface IRepoModalProps {
     setRepoItem: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-const RepoModal = ({ isModalOpen, onCloseModal, modalTitle, repoItem, setRepoItem}: IRepoModalProps) => {
-
-    const repoData = JSON.parse(localStorage.getItem("repos") || "[]")
+const RepoModal = ({repoData, isModalOpen, onCloseModal, modalTitle, repoItem, setRepoItem}: IRepoModalProps) => {
 
     const [searchQuery, setSearchQuery] = useState("");
 
@@ -39,11 +38,8 @@ const RepoModal = ({ isModalOpen, onCloseModal, modalTitle, repoItem, setRepoIte
     };
 
     const submitRepos = (selectedRepos: string[]) => {
-        if(selectedRepos.length > 0) {
-            setRepoItem(selectedRepos)
-            onCloseModal()
-        }
-        
+        setRepoItem(selectedRepos)  
+        onCloseModal()
     }
 
     return (

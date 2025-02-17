@@ -2,8 +2,7 @@ import { CiStar } from "react-icons/ci";
 import { FaCaretDown } from "react-icons/fa";
 import { RiGitRepositoryLine } from "react-icons/ri";
 import { RxDragHandleDots2 } from "react-icons/rx";
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RepoModal from "../../modal/repoModal/RepoModal";
 
     const Overview = () => {
@@ -17,6 +16,22 @@ import RepoModal from "../../modal/repoModal/RepoModal";
     
     const [repoItem, setRepoItem] = useState<string[]>([])
 
+    const repoData = JSON.parse(localStorage.getItem("repos") || "[]")
+
+    const populestRepos = () => {
+        const popuRepo = repoData.sort((a: any,b: any) => b.stargazers_count - a.stargazers_count)
+        const topRepoNames = popuRepo.slice(0, 6).map((repo: any) => repo.name);
+        setRepoItem(topRepoNames)
+    }
+
+    useEffect(() => {
+        if (repoItem.length < 1) {
+            populestRepos()
+        }
+    }, [repoItem]);
+
+    console.log(repoItem);
+
     return (
         <>
             <div className="pinned flex flex-col mb-3">
@@ -24,7 +39,7 @@ import RepoModal from "../../modal/repoModal/RepoModal";
                     <span className="flex text-lg mb-3">Pinned</span>
                     <button type="button" onClick={() => setModalOpen(true)} className="text-xs text-blue-700 hover:underline">Customize your pins</button>
                 </div>
-                <RepoModal isModalOpen={isModalOpen} onCloseModal={()=> setModalOpen(false) } modalTitle="Edit pinned items" repoItem={repoItem} setRepoItem={setRepoItem} />
+                <RepoModal repoData={repoData} isModalOpen={isModalOpen} onCloseModal={()=> setModalOpen(false) } modalTitle="Edit pinned items" repoItem={repoItem} setRepoItem={setRepoItem} />
                 <div className="flex flex-col gap-y-4">
                     <div className="flex flex-row gap-x-4 items-center">
                         <div className="flex flex-col border rounded border-gray-300 w-1/2 p-4 gap-y-4">
