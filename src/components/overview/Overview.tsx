@@ -4,21 +4,28 @@ import { RiGitRepositoryLine } from "react-icons/ri";
 import { RxDragHandleDots2 } from "react-icons/rx";
 
 import { useState } from "react";
+import RepoModal from "../../modal/repoModal/RepoModal";
 
-const Overview = () => {
+    const Overview = () => {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const day = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
     const years = ["2025", "2024", "2023", "2022", "2021"];
 
     const [activeYearButton, setActiveYearButton] = useState("2025");
 
+    const [isModalOpen, setModalOpen] = useState(false);
+
     return (
         <>
             <div className="pinned flex flex-col mb-3">
                 <div className="flex flex-row justify-between items-center">
                     <span className="flex text-lg mb-3">Pinned</span>
-                    <a href="" className="text-xs text-blue-700 hover:underline">Customize your pins</a>
+                    <button type="button" onClick={() => setModalOpen(true)} className="text-xs text-blue-700 hover:underline">Customize your pins</button>
                 </div>
+                <RepoModal isModalOpen={isModalOpen} onCloseModal={()=> setModalOpen(false) } modalTitle="Edit pinned items">
+                    <p>Edit pinned items</p>
+                    
+                </RepoModal>
                 <div className="flex flex-col gap-y-4">
                     <div className="flex flex-row gap-x-4 items-center">
                         <div className="flex flex-col border rounded border-gray-300 w-1/2 p-4 gap-y-4">
