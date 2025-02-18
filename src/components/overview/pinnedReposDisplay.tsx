@@ -21,7 +21,7 @@ const PinnedReposDisplay = ({repoData, repoItem} : {repoData: any; repoItem: str
             {[...Array(repoRows)].map((_, i) => (
                 <div key={i} className="flex flex-row items-center justify-start w-full">
                     {repoSelection.slice(i * 2, i * 2 + 2).map((repo:any) => (
-                        <div key={repo.name} className="flex flex-col border rounded border-gray-300 w-1/2 mx-2 p-4 gap-y-4 gap-x-2">
+                        <div key={repo.name} className="flex flex-col border justify-between rounded border-gray-300 w-1/2 mx-2 p-4 gap-y-2 gap-x-2 h-30">
                             <div className="flex flex-row justify-between items-center">
                                 <div className="flex flex-row items-center gap-x-2">
                                     <span className="flex text-gray-600 text-lg"><RiGitRepositoryLine /></span>
@@ -29,6 +29,12 @@ const PinnedReposDisplay = ({repoData, repoItem} : {repoData: any; repoItem: str
                                     <span className="flex text-gray-400 rounded-xl border text-xs px-1">{repo.private ? "Private" : "Public"}</span>
                                 </div>
                                 <RxDragHandleDots2 className="flex items-center"/>
+                            </div>
+                            <div className="flex flex-row gap-x-5">
+                                {repo.description && (
+                                    <span className="text-xs text-gray-400">{repo.description}</span>
+                                )}
+                                
                             </div>
                             <div className="flex flex-row gap-x-5">
                                 <div className="flex flex-row items-center gap-x-2">
