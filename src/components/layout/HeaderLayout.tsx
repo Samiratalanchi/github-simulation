@@ -69,7 +69,7 @@ const HeaderLayout = ({ children, userProfileData, repoData, isLeftSideMenuOpen,
     return (
         <ProfileGuard>
             <>
-                <div className="fixed inset-x-0 flex w-full flex-row border-b border-gray-300">
+                <div className="inset-x-0 flex w-full flex-row border-b border-gray-300">
                     <div className="flex flex-col grow gap-y-0 overflow-x-auto bg-gray-100 px-6">
                         <div className="flex h-14 shrink-0 items-center justify-between">
                             <div className="flex items-center">
