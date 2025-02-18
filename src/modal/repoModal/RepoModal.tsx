@@ -10,12 +10,12 @@ interface IRepoModalProps {
     modalTitle: string;
     repoItem: string[];
     setRepoItem: React.Dispatch<React.SetStateAction<string[]>>;
+    getPopularRepos: () => string[];
 }
 
-const RepoModal = ({repoData, isModalOpen, onCloseModal, modalTitle, repoItem, setRepoItem}: IRepoModalProps) => {
+const RepoModal = ({repoData, isModalOpen, onCloseModal, modalTitle, repoItem, setRepoItem, getPopularRepos}: IRepoModalProps) => {
 
     const [searchQuery, setSearchQuery] = useState("");
-
     const [selectedRepos, setSelectedRepos] = useState<string[]>([]);
 
     useEffect(() => {
@@ -41,8 +41,9 @@ const RepoModal = ({repoData, isModalOpen, onCloseModal, modalTitle, repoItem, s
     };
 
     const submitRepos = (selectedRepos: string[]) => {
-        setRepoItem(selectedRepos)
-        localStorage.setItem("favRepos",JSON.stringify(selectedRepos));  
+        const newSelection = selectedRepos.length > 0 ? selectedRepos : getPopularRepos();
+        setRepoItem(newSelection)
+        localStorage.setItem("favRepos",JSON.stringify(newSelection));  
         onCloseModal()
     }
 

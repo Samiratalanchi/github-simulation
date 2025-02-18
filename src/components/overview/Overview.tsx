@@ -15,19 +15,24 @@ const Overview = ({ repoData }: { repoData: any }) => {
     const [repoItem, setRepoItem] = useState<string[]>([])
 
 
+    const getPopularRepos = () => {
+        return [...repoData]
+            .sort((a, b) => b.stargazers_count - a.stargazers_count) // Sort by stars (descending)
+            .slice(0, 6) // Take top 6
+            .map((repo) => repo.name)
+    }
+
     useEffect(() => {
         const savedRepos = JSON.parse(localStorage.getItem("favRepos") || "[]");
         if (savedRepos.length > 0) {
             setRepoItem(savedRepos);
         } else {
-            const popuRepo = [...repoData]
-                .sort((a, b) => b.stargazers_count - a.stargazers_count)
-                .slice(0, 6)
-                .map((repo) => repo.name);
-            setRepoItem(popuRepo);
-            localStorage.setItem("favRepos", JSON.stringify(popuRepo));
+            const popuRepos = getPopularRepos();
+            setRepoItem(popuRepos);
+            localStorage.setItem("favRepos", JSON.stringify(popuRepos));
         }
-    },[repoData]);
+    }, [repoData]);
+
 
     return (
         <>
@@ -36,7 +41,7 @@ const Overview = ({ repoData }: { repoData: any }) => {
                     <span className="flex text-lg mb-3">Pinned</span>
                     <button type="button" onClick={() => setModalOpen(true)} className="text-xs text-blue-700 hover:underline">Customize your pins</button>
                 </div>
-                <RepoModal repoData={repoData} isModalOpen={isModalOpen} onCloseModal={()=> setModalOpen(false) } modalTitle="Edit pinned items" repoItem={repoItem} setRepoItem={setRepoItem} />
+                <RepoModal repoData={repoData} isModalOpen={isModalOpen} onCloseModal={()=> setModalOpen(false) } modalTitle="Edit pinned items" repoItem={repoItem} setRepoItem={setRepoItem} getPopularRepos={getPopularRepos} />
                 <div className="flex flex-col gap-y-4">
                     <PinnedReposDisplay repoData={repoData} repoItem={repoItem} />
                 </div>
