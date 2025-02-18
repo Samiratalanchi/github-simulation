@@ -3,12 +3,13 @@ import { CiStar } from "react-icons/ci";
 import { GoRepoForked } from "react-icons/go";
 import { IoMdArrowDropdown } from "react-icons/io";
 import colors from "../../colors/color.json"
+import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 
 const Repositories = ({ repoData }: { repoData: any }) => {
 
     const [searchQuery, setSearchQuery] = useState("");
 
-    const latestRepos = [...repoData].sort(
+    const finalRepos = [...repoData].sort(
         (a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
     )
 
@@ -56,6 +57,8 @@ const Repositories = ({ repoData }: { repoData: any }) => {
         return colors[language as keyof typeof colors].color || "#ccc"
     }
     
+    const [startPosition, setStartPosition] = useState(0)
+
     return (
         <>
             <div className="flex w-full max-w-3xl flex-row border-b gap-x-2 border-gray-300 py-3">
@@ -80,7 +83,7 @@ const Repositories = ({ repoData }: { repoData: any }) => {
                 </button>
             </div>
             <div className="flex w-full max-w-3xl mx-auto flex-col">
-                {latestRepos.map((repo: any) => (
+                {finalRepos.slice(startPosition, startPosition + 20).map((repo: any) => (
                     <div key={repo.name} className="flex flex-col border-b justify-between rounded border-gray-300 p-4 gap-y-2 gap-x-2">
                         <div className="flex flex-row justify-between items-center">
                             <div className="flex flex-row items-center gap-x-2">
@@ -95,10 +98,12 @@ const Repositories = ({ repoData }: { repoData: any }) => {
                             
                         </div>
                         <div className="flex flex-row gap-x-5">
-                            <div className="flex flex-row items-center gap-x-2">
-                                <span className="w-4 h-4 rounded-full" style={{ backgroundColor: getLanguageColor(repo.language) }}></span>
-                                <span className="text-gray-600 text-sm">{repo.language}</span>
-                            </div>
+                            {repo.language && (
+                                <div className="flex flex-row items-center gap-x-2">
+                                    <span className="w-4 h-4 rounded-full" style={{ backgroundColor: getLanguageColor(repo.language) }}></span>
+                                    <span className="text-gray-600 text-sm">{repo.language}</span>
+                                </div>
+                            )}
                             {repo.stargazers_count > 0 && (
                                 <div className="flex flex-row items-center gap-x-1">
                                 <CiStar className="flex text-lg" />
@@ -118,6 +123,18 @@ const Repositories = ({ repoData }: { repoData: any }) => {
                     </div>
                 ))}
             </div>
+            {finalRepos.length > 20 && (
+                <div className="flex w-full max-w-3xl mx-auto flex-row justify-center mb-10">
+                    <button type="button" onClick={() => setStartPosition(startPosition - 20)} disabled={startPosition - 20 < 0 } className="px-3 h-8 text-sm rounded flex flex-row items-center justify-center cursor-pointer text-blue-600 hover:border hover:border-gray-200 disabled:text-gray-300 disabled:cursor-not-allowed">
+                        <GrFormPrevious className="text-lg"/>
+                        <span>Previous</span>
+                    </button>
+                    <button type="button" onClick={() => setStartPosition(startPosition + 20)} disabled={startPosition + 20 > finalRepos.length} className="px-3 h-8 text-sm rounded flex flex-row items-center justify-center cursor-pointer text-blue-600 hover:border hover:border-gray-200 disabled:text-gray-300 disabled:cursor-not-allowed">
+                        <span>Next</span>
+                        <GrFormNext className="text-lg"/>
+                    </button>
+                </div>
+            )}
         </>
     )
 }
