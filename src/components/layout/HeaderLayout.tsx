@@ -21,9 +21,11 @@ interface HeaderLayoutProps {
     setIsLeftSideMenuOpen: (state: boolean) => void;
     isRightSideMenuOpen: boolean;
     setIsRightSideMenuOpen: (state: boolean) => void;
+    activeTab: string
+    setActiveTab: (state: string) => void;
 }
 
-const HeaderLayout = ({ children, userProfileData, repoData, isLeftSideMenuOpen, setIsLeftSideMenuOpen, isRightSideMenuOpen, setIsRightSideMenuOpen} : HeaderLayoutProps ) => {
+const HeaderLayout = ({ children, userProfileData, repoData, isLeftSideMenuOpen, setIsLeftSideMenuOpen, isRightSideMenuOpen, setIsRightSideMenuOpen, activeTab, setActiveTab} : HeaderLayoutProps ) => {
     
     const tabs = [
         { name: "Overview", icon: BsBook },
@@ -48,7 +50,6 @@ const HeaderLayout = ({ children, userProfileData, repoData, isLeftSideMenuOpen,
         ],
     };
 
-    const [activeTab, setActiveTab] = useState("Overview");
 
     const [repoShowCounter, setRepoShowCounter] = useState(5);
 

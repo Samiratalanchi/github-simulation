@@ -1,4 +1,4 @@
-import LoginHolder from "../../components/Login/LoginHolder"
+import LoginHolder from "../../components/login/LoginHolder"
 
 const Login = () => {
     return (
