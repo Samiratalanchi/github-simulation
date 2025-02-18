@@ -20,9 +20,10 @@ const RepoModal = ({repoData, isModalOpen, onCloseModal, modalTitle, repoItem, s
 
     useEffect(() => {
         if (isModalOpen) {
-            setSelectedRepos(repoItem);
+            const savedRepos = JSON.parse(localStorage.getItem("favRepos") || "[]")
+            setSelectedRepos(savedRepos.length ? savedRepos : repoItem);
         }
-    }, [isModalOpen, repoItem]);
+    }, [isModalOpen]);
 
     const filteredRepos = searchQuery.trim()
         ? repoData.filter((repo: { name: string }) =>
@@ -30,15 +31,18 @@ const RepoModal = ({repoData, isModalOpen, onCloseModal, modalTitle, repoItem, s
         )
         : repoData;
 
-    const handleSelection = (repoName: string, checked: boolean) => {
+    const handleSelection = (repoName: string) => {
         setSelectedRepos((prev) => {
-            if (checked) return prev.length < 6 ? [...prev, repoName] : prev;
-            return prev.filter((name) => name !== repoName);
+            if (prev.includes(repoName)) {
+                return prev.filter((name) => name !== repoName);
+            }
+            return prev.length < 6 ? [...prev, repoName] : prev;
         });
     };
 
     const submitRepos = (selectedRepos: string[]) => {
-        setRepoItem(selectedRepos)  
+        setRepoItem(selectedRepos)
+        localStorage.setItem("favRepos",JSON.stringify(selectedRepos));  
         onCloseModal()
     }
 
@@ -72,7 +76,7 @@ const RepoModal = ({repoData, isModalOpen, onCloseModal, modalTitle, repoItem, s
                                         className="peer"
                                         id={`repo-${repo.id}`}
                                         checked={isChecked}
-                                        onChange={(e) => handleSelection(repo.name, e.target.checked)}
+                                        onChange={() => handleSelection(repo.name)}
                                         disabled={!isChecked && selectedRepos.length >= 6}
                                     />                                    <label 
                                         htmlFor={`repo-${repo.id}`} 

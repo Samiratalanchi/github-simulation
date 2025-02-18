@@ -12,24 +12,23 @@ const Overview = () => {
     const [activeYearButton, setActiveYearButton] = useState("2025");
 
     const [isModalOpen, setModalOpen] = useState(false);
-    
     const [repoItem, setRepoItem] = useState<string[]>([])
 
     const repoData = JSON.parse(localStorage.getItem("repos") || "[]")
-
-    const populestRepos = () => {
-        const popuRepo = repoData.sort((a: any,b: any) => b.stargazers_count - a.stargazers_count)
-        const topRepoNames = popuRepo.slice(0, 6).map((repo: any) => repo.name);
-        setRepoItem(topRepoNames)
-    }
-
+    
     useEffect(() => {
-        if (repoItem.length < 1) {
-            populestRepos()
+        const savedRepos = JSON.parse(localStorage.getItem("favRepos") || "[]");
+        if (savedRepos.length > 0) {
+            setRepoItem(savedRepos);
+        } else {
+            const popuRepo = [...repoData]
+                .sort((a, b) => b.stargazers_count - a.stargazers_count)
+                .slice(0, 6)
+                .map((repo) => repo.name);
+            setRepoItem(popuRepo);
+            localStorage.setItem("favRepos", JSON.stringify(popuRepo));
         }
-    }, [repoItem]);
-
-    console.log(repoItem);
+    },[repoData]);
 
     return (
         <>
