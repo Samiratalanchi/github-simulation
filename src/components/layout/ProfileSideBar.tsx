@@ -28,11 +28,11 @@ const ProfileSideBar = ({ children, userProfileData, isLeftSideMenuOpen, isRight
     return (
         <>
             <div className="flex mx-auto mt-35 w-auto h-full flex-row gap-x-5">
-                <div className="flex items-center">
+                <div className="flex max-w-xl">
                     <div className="card flex-col items-center px-2">
                         <button 
                             type="button" 
-                            className={`${isLeftSideMenuOpen || isRightSideMenuOpen ? "-z-1" : "z-2"} absolute cursor-pointer flex flex-row items-center md:mt-60 md:ml-60 mt-48 ml-48 px-2 py-1 border border-gray-400 w-10 hover:w-25 h-10 rounded-full  bg-white  overflow-hidden transition-all duration-300 ease-in-out group `}
+                            className={`${isLeftSideMenuOpen || isRightSideMenuOpen ? "-z-1" : "z-2"} absolute cursor-pointer flex flex-row items-center lg:mt-55 lg:ml-50 md:mt-50 md:ml-45 mt-42 ml-42 px-2 py-1 border border-gray-400 w-10 hover:w-25 h-10 rounded-full  bg-white  overflow-hidden transition-all duration-300 ease-in-out group `}
                             >
                             <span className="flex text-[14px] transition-opacity duration-300 group-hover:opacity-100">
                                 👋
@@ -41,7 +41,7 @@ const ProfileSideBar = ({ children, userProfileData, isLeftSideMenuOpen, isRight
                                 Edit Status
                             </span>
                         </button>
-                        <img src={userProfileData.avatar_url} className={`${isLeftSideMenuOpen || isRightSideMenuOpen ? "-z-10" : "z-1"} relative flex md:w-75 md:h-75 w-60 h-60 mb-5 rounded-full border border-gray-400`}/>
+                        <img src={userProfileData.avatar_url} className={`${isLeftSideMenuOpen || isRightSideMenuOpen ? "-z-10" : "z-1"} relative flex md:w-70 w-55 h-auto mb-5 rounded-full border border-gray-400`}/>
                         <span className="font-semibold flex text-2xl">{userProfileData.name}</span>
                         <span className="flex text-gray-400 mb-3 text-xl">{userProfileData.login}</span>
                         <span className="flex mb-4 text-md text-wrap max-w-80">{userProfileData.bio}</span>
@@ -64,7 +64,7 @@ const ProfileSideBar = ({ children, userProfileData, isLeftSideMenuOpen, isRight
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col gap-y-3">
+                <div className="flex flex-col gap-y-3 w-full max-w-3xl mx-auto">
                     {children}
                 </div>
             </div>

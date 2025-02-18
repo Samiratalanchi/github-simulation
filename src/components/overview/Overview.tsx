@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import RepoModal from "../../modal/repoModal/RepoModal";
 import PinnedReposDisplay from "./pinnedReposDisplay";
 
-const Overview = () => {
+const Overview = ({ repoData }: { repoData: any }) => {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const day = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
     const years = ["2025", "2024", "2023", "2022", "2021"];
@@ -14,8 +14,7 @@ const Overview = () => {
     const [isModalOpen, setModalOpen] = useState(false);
     const [repoItem, setRepoItem] = useState<string[]>([])
 
-    const repoData = JSON.parse(localStorage.getItem("repos") || "[]")
-    
+
     useEffect(() => {
         const savedRepos = JSON.parse(localStorage.getItem("favRepos") || "[]");
         if (savedRepos.length > 0) {

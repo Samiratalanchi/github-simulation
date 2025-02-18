@@ -32,10 +32,10 @@ const Profile = () => {
         >
             <ProfileSideBar userProfileData={userProfileData} isLeftSideMenuOpen={isLeftSideMenuOpen} isRightSideMenuOpen={isRightSideMenuOpen} >
                 {activeTab === "Repositories" ?
-                <Repositories /> :
-                <Overview />
+                <Repositories repoData={repoData}/> :
+                <Overview repoData={repoData}/>
                 }
-            </ProfileSideBar>
+            </ProfileSideBar >
         </HeaderLayout>
     )
 }
