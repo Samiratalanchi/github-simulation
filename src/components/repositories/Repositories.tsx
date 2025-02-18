@@ -4,20 +4,33 @@ import { GoRepoForked } from "react-icons/go";
 import { IoMdArrowDropdown } from "react-icons/io";
 import colors from "../../colors/color.json"
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
+import RepoTypeModal from "../../modal/repoModal/RepoTypeModal";
+import RepoLanguageModal from "../../modal/repoModal/RepoLanguageModal";
+import RepoSortModal from "../../modal/repoModal/RepoSortModal";
 
 const Repositories = ({ repoData }: { repoData: any }) => {
 
     const [searchQuery, setSearchQuery] = useState("");
 
-    const finalRepos = [...repoData].sort(
+    const sortedRepos = [...repoData].sort(
         (a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
     )
 
+    const finalRepos = searchQuery.trim()
+        ? sortedRepos.filter((repo: { name: string }) =>
+            repo.name.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+        : sortedRepos;
+
+    const [isTypeModalOpen, setTypeModalOpen] = useState(false);
+    const [isLanguageModalOpen, setLanguageModalOpen] = useState(false);
+    const [isSortModalOpen, setSortModalOpen] = useState(false);
+    
     const formatDate = (dateString: string) => {
         const date = new Date(dateString);
         return new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric" }).format(date);
     };
-    
+
     const getRelativeTime = (dateString: string) => {
         const now = new Date();
         const past = new Date(dateString);
@@ -69,19 +82,22 @@ const Repositories = ({ repoData }: { repoData: any }) => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                 />
-                <button type="button" className="px-3 h-8 text-sm bg-gray-100 hover:bg-gray-200 rounded flex flex-row items-center justify-center">
+                <button type="button" onClick={() => setTypeModalOpen(true)} className="px-3 h-8 text-sm bg-gray-100 hover:bg-gray-200 rounded flex flex-row items-center justify-center">
                     <span>Type</span>
                     <IoMdArrowDropdown className="text-lg"/>
                 </button>
-                <button type="button" className="px-3 h-8 text-sm bg-gray-100 hover:bg-gray-200 rounded flex flex-row items-center justify-center">
+                <button type="button" onClick={() => setLanguageModalOpen(true)} className="px-3 h-8 text-sm bg-gray-100 hover:bg-gray-200 rounded flex flex-row items-center justify-center">
                     <span>Language</span>
                     <IoMdArrowDropdown className="text-lg"/>
                 </button>
-                <button type="button" className="px-3 h-8 text-sm bg-gray-100 hover:bg-gray-200 rounded flex flex-row items-center justify-center">
+                <button type="button" onClick={() => setSortModalOpen(true)} className="px-3 h-8 text-sm bg-gray-100 hover:bg-gray-200 rounded flex flex-row items-center justify-center">
                     <span>Sort</span>
                     <IoMdArrowDropdown className="text-lg"/>
                 </button>
             </div>
+            <RepoTypeModal finalRepos={finalRepos} isTypeModalOpen={isTypeModalOpen} onTypeCloseModal={()=> setTypeModalOpen(false) } modalTitle="Select type" />
+            <RepoLanguageModal finalRepos={finalRepos} isLanguageModalOpen={isLanguageModalOpen} onLanguageCloseModal={()=> setLanguageModalOpen(false) } modalTitle="Select language" />
+            <RepoSortModal finalRepos={finalRepos} isSortModalOpen={isSortModalOpen} onSortCloseModal={()=> setSortModalOpen(false) } modalTitle="Select order" />
             <div className="flex w-full max-w-3xl mx-auto flex-col">
                 {finalRepos.slice(startPosition, startPosition + 20).map((repo: any) => (
                     <div key={repo.name} className="flex flex-col border-b justify-between rounded border-gray-300 p-4 gap-y-2 gap-x-2">

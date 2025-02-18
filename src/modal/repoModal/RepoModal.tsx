@@ -48,7 +48,7 @@ const RepoModal = ({repoData, isModalOpen, onCloseModal, modalTitle, repoItem, s
     }
 
     return (
-        <Modal isModalOpen={isModalOpen} onCloseModal={onCloseModal} modalTitle={modalTitle}>
+        <Modal isModalOpen={isModalOpen} onCloseModal={onCloseModal} modalTitle={modalTitle} backModalClassName="justify-center items-center" modalClassName="w-120 h-160" titleClassName="text-lg">
             <p className="text-sm text-gray-400">Select up to six public repositories you'd like to show to anyone.</p>
             <input
                 type="text"
