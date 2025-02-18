@@ -28,7 +28,7 @@ const ProfileSideBar = ({ children, userProfileData, isLeftSideMenuOpen, isRight
     return (
         <>
             <div className="flex mx-auto mt-10 w-auto h-full flex-row gap-x-5">
-                <div className="flex max-w-xl">
+                <div className="flex max-w-xl w-1/4">
                     <div className="card flex-col items-center px-2">
                         <button 
                             type="button" 
@@ -64,7 +64,7 @@ const ProfileSideBar = ({ children, userProfileData, isLeftSideMenuOpen, isRight
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col gap-y-3 w-full max-w-3xl mx-auto">
+                <div className="flex flex-col gap-y-3 max-w-3xl lg:min-w-190 mx-auto">
                     {children}
                 </div>
             </div>

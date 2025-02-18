@@ -57,8 +57,8 @@ const Repositories = ({ repoData }: { repoData: any }) => {
     }
     
     return (
-        <div className="w-full min-w-170 max-w-3xl mx-auto mb-10">
-            <div className="flex w-full flex-row border-b gap-x-2 items-center border-gray-300 py-3">
+        <>
+            <div className="flex w-full max-w-3xl flex-row border-b gap-x-2 border-gray-300 py-3">
                 <input
                     type="text"
                     className="border flex-grow border-gray-400 p-1 rounded text-sm focus:border-blue-800"
@@ -66,22 +66,22 @@ const Repositories = ({ repoData }: { repoData: any }) => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                 />
-                <button type="button" className="px-3 w-1/10 h-8 text-sm bg-gray-100 hover:bg-gray-200 rounded flex flex-row items-center justify-center">
+                <button type="button" className="px-3 h-8 text-sm bg-gray-100 hover:bg-gray-200 rounded flex flex-row items-center justify-center">
                     <span>Type</span>
                     <IoMdArrowDropdown className="text-lg"/>
                 </button>
-                <button type="button" className="px-3 w-2/10 h-8 text-sm bg-gray-100 hover:bg-gray-200 rounded flex flex-row items-center justify-center">
+                <button type="button" className="px-3 h-8 text-sm bg-gray-100 hover:bg-gray-200 rounded flex flex-row items-center justify-center">
                     <span>Language</span>
                     <IoMdArrowDropdown className="text-lg"/>
                 </button>
-                <button type="button" className="px-3 w-1/10 h-8 text-sm bg-gray-100 hover:bg-gray-200 rounded flex flex-row items-center justify-center">
+                <button type="button" className="px-3 h-8 text-sm bg-gray-100 hover:bg-gray-200 rounded flex flex-row items-center justify-center">
                     <span>Sort</span>
                     <IoMdArrowDropdown className="text-lg"/>
                 </button>
             </div>
-            <div className="flex w-full flex-col items-center">
+            <div className="flex w-full max-w-3xl mx-auto flex-col">
                 {latestRepos.map((repo: any) => (
-                    <div key={repo.name} className="flex flex-col w-full border-b justify-between rounded border-gray-300 p-4 gap-y-2 gap-x-2">
+                    <div key={repo.name} className="flex flex-col border-b justify-between rounded border-gray-300 p-4 gap-y-2 gap-x-2">
                         <div className="flex flex-row justify-between items-center">
                             <div className="flex flex-row items-center gap-x-2">
                                 <a className="flex text-blue-700 text-lg font-bold hover:underline" href="">{repo.name}</a>
@@ -118,7 +118,7 @@ const Repositories = ({ repoData }: { repoData: any }) => {
                     </div>
                 ))}
             </div>
-        </div>
+        </>
     )
 }
 
