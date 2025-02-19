@@ -12,15 +12,55 @@ const Repositories = ({ repoData }: { repoData: any }) => {
 
     const [searchQuery, setSearchQuery] = useState("");
 
-    const sortedRepos = [...repoData].sort(
+    /*const sortedRepos = [...(repoData || [])].sort(
         (a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
-    )
+    );
 
-    const finalRepos = searchQuery.trim()
-        ? sortedRepos.filter((repo: { name: string }) =>
-            repo.name.toLowerCase().includes(searchQuery.toLowerCase())
-        )
-        : sortedRepos;
+    const finalRepos = (sortedRepos || []).filter((repo: { name?: string, language?: string, private?: string }) => 
+        (type === "All" || repo.private?.toString() === type.toLowerCase()) && 
+        (language === "All" || repo.language === language) &&
+        (searchQuery.trim() ? repo.name?.toLowerCase().includes(searchQuery.toLowerCase()) : true)
+    );*/
+
+    const filterAndSortRepos = () => {
+        let filteredRepos = [...(repoData || [])];
+    
+        // Filter by type (All, Public, Private)
+        if (type !== "All") {
+            if (type === "Private") {
+                filteredRepos = filteredRepos.filter((repo) => repo.private === true);
+            } else if (type === "Public") {
+                filteredRepos = filteredRepos.filter((repo) => repo.private !== true); // Public if not private
+            }
+        }
+    
+        // Filter by language
+        if (language !== "All") {
+            filteredRepos = filteredRepos.filter((repo) => repo.language === language);
+        }
+    
+        // Filter by search query
+        if (searchQuery.trim()) {
+            filteredRepos = filteredRepos.filter((repo) =>
+                repo.name?.toLowerCase().includes(searchQuery.toLowerCase())
+            );
+        }
+    
+        // Sort function
+        filteredRepos.sort((a, b) => {
+            if (sort === "Last updated") {
+                return new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime();
+            } else if (sort === "Name") {
+                return a.name.localeCompare(b.name);
+            } else if (sort === "Stars") {
+                return b.stargazers_count - a.stargazers_count;
+            }
+            return 0;
+        });
+    
+        return filteredRepos;
+    };
+    
 
     const [isTypeModalOpen, setTypeModalOpen] = useState(false);
     const [isLanguageModalOpen, setLanguageModalOpen] = useState(false);
@@ -29,6 +69,8 @@ const Repositories = ({ repoData }: { repoData: any }) => {
     const [type, setType] = useState("All");
     const [language, setLanguage] = useState("All");
     const [sort, setSort] = useState("Last updated");
+
+    const finalRepos = filterAndSortRepos();
     
     const formatDate = (dateString: string) => {
         const date = new Date(dateString);
@@ -80,17 +122,14 @@ const Repositories = ({ repoData }: { repoData: any }) => {
         if (isTypeModalOpen) {
             setLanguageModalOpen(false);
             setSortModalOpen(false);
-            setTypeModalOpen(true);
         }
         if (isLanguageModalOpen) {
             setTypeModalOpen(false);
             setSortModalOpen(false);
-            setLanguageModalOpen(true);
         }
         if (isSortModalOpen) {
             setTypeModalOpen(false);
             setLanguageModalOpen(false);
-            setSortModalOpen(true);
         }
     }, [isTypeModalOpen,isLanguageModalOpen, isSortModalOpen]);
 
@@ -118,11 +157,16 @@ const Repositories = ({ repoData }: { repoData: any }) => {
                 </button>
             </div>
             <RepoTypeModal type={type} setType={setType} isTypeModalOpen={isTypeModalOpen} onTypeCloseModal={()=> setTypeModalOpen(false) } modalTitle="Select type" />
-            <RepoLanguageModal finalRepos={finalRepos} language={language} setLanguage={setLanguage} isLanguageModalOpen={isLanguageModalOpen} onLanguageCloseModal={()=> setLanguageModalOpen(false) } modalTitle="Select language" />
+            <RepoLanguageModal repoData={repoData} language={language} setLanguage={setLanguage} isLanguageModalOpen={isLanguageModalOpen} onLanguageCloseModal={()=> setLanguageModalOpen(false) } modalTitle="Select language" />
             <RepoSortModal sort={sort} setSort={setSort} isSortModalOpen={isSortModalOpen} onSortCloseModal={()=> setSortModalOpen(false) } modalTitle="Select order" />
+            {(language !== "All" || type !== "All" || sort !== "Last updated") && (
+                <div className="flex w-full max-w-3xl mx-auto flex-col border-b border-gray-300 p-4">
+                    <span><span className={finalRepos.length > 0 ? "text-green-600" : "text-red-600"}>{finalRepos.length}</span> repositories that have {language} language, in {type} type, sorted by {sort}</span>
+                </div>
+            )}
             <div className="flex w-full max-w-3xl mx-auto flex-col">
                 {finalRepos.slice(startPosition, startPosition + 20).map((repo: any) => (
-                    <div key={repo.name} className="flex flex-col border-b justify-between rounded border-gray-300 p-4 gap-y-2 gap-x-2">
+                    <div key={repo.id} className="flex flex-col border-b justify-between rounded border-gray-300 p-4 gap-y-2 gap-x-2">
                         <div className="flex flex-row justify-between items-center">
                             <div className="flex flex-row items-center gap-x-2">
                                 <a className="flex text-blue-700 text-lg font-bold hover:underline" href="">{repo.name}</a>
@@ -167,7 +211,7 @@ const Repositories = ({ repoData }: { repoData: any }) => {
                         <GrFormPrevious className="text-lg"/>
                         <span>Previous</span>
                     </button>
-                    <button type="button" onClick={() => setStartPosition(startPosition + 20)} disabled={startPosition + 20 > finalRepos.length} className="px-3 h-8 text-sm rounded flex flex-row items-center justify-center cursor-pointer text-blue-600 hover:border hover:border-gray-200 disabled:text-gray-300 disabled:cursor-not-allowed">
+                    <button type="button" onClick={() => setStartPosition(startPosition + 20)} disabled={startPosition + 20 >= finalRepos.length} className="px-3 h-8 text-sm rounded flex flex-row items-center justify-center cursor-pointer text-blue-600 hover:border hover:border-gray-200 disabled:text-gray-300 disabled:cursor-not-allowed">
                         <span>Next</span>
                         <GrFormNext className="text-lg"/>
                     </button>

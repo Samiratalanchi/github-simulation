@@ -16,8 +16,6 @@ const Profile = () => {
     const [isRightSideMenuOpen, setIsRightSideMenuOpen] = useState(false);
 
     if (!userProfileData) return <div className="text-center mt-10">No user data found / Please login first</div>;
-
-    console.log("Profile",isLeftSideMenuOpen,isRightSideMenuOpen);
     
     return (
         <HeaderLayout
@@ -32,7 +30,7 @@ const Profile = () => {
         >
             <ProfileSideBar userProfileData={userProfileData} isLeftSideMenuOpen={isLeftSideMenuOpen} isRightSideMenuOpen={isRightSideMenuOpen} >
                 {activeTab === "Repositories" ?
-                <Repositories repoData={repoData}/> :
+                <Repositories repoData={repoData || []}/> :
                 <Overview repoData={repoData}/>
                 }
             </ProfileSideBar >
