@@ -7,6 +7,7 @@ import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import RepoTypeModal from "../../modal/repoModal/RepoTypeModal";
 import RepoLanguageModal from "../../modal/repoModal/RepoLanguageModal";
 import RepoSortModal from "../../modal/repoModal/RepoSortModal";
+import { IoCloseSharp } from "react-icons/io5";
 
 const Repositories = ({ repoData }: { repoData: any }) => {
 
@@ -76,6 +77,12 @@ const Repositories = ({ repoData }: { repoData: any }) => {
         const date = new Date(dateString);
         return new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric" }).format(date);
     };
+
+    const clearFilter = () => {
+        setType("All");
+        setLanguage("All");
+        setSort("Last updated")
+    }
 
     const getRelativeTime = (dateString: string) => {
         const now = new Date();
@@ -160,8 +167,12 @@ const Repositories = ({ repoData }: { repoData: any }) => {
             <RepoLanguageModal repoData={repoData} language={language} setLanguage={setLanguage} isLanguageModalOpen={isLanguageModalOpen} onLanguageCloseModal={()=> setLanguageModalOpen(false) } modalTitle="Select language" />
             <RepoSortModal sort={sort} setSort={setSort} isSortModalOpen={isSortModalOpen} onSortCloseModal={()=> setSortModalOpen(false) } modalTitle="Select order" />
             {(language !== "All" || type !== "All" || sort !== "Last updated") && (
-                <div className="flex w-full max-w-3xl mx-auto flex-col border-b border-gray-300 p-4">
-                    <span><span className={finalRepos.length > 0 ? "text-green-600" : "text-red-600"}>{finalRepos.length}</span> repositories that have {language} language, in {type} type, sorted by {sort}</span>
+                <div className="flex w-full max-w-3xl mx-auto items-center justify-between flex-row border-b border-gray-300 p-4">
+                    <span><span className={finalRepos.length > 0 ? "text-green-600" : "text-red-600"}>{finalRepos.length}</span> results that have {language} language, in {type} type, sorted by {sort}</span>
+                    <button type="button" onClick={() => clearFilter()} className="px-3 h-8 text-sm hover:text-blue-600 gap-x-2 rounded flex flex-row items-center justify-center cursor-pointer">
+                        <IoCloseSharp className="text-xl p-1 bg-gray-200 rounded font-bold"/>
+                        <span className="">Clear filter</span>
+                    </button>
                 </div>
             )}
             <div className="flex w-full max-w-3xl mx-auto flex-col">
