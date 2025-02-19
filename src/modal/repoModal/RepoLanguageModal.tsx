@@ -1,4 +1,5 @@
 
+import { IoCheckmarkOutline } from "react-icons/io5";
 import Modal from "../Modal";
 
 interface IRepoModalProps {
@@ -6,14 +7,29 @@ interface IRepoModalProps {
     isLanguageModalOpen: boolean;
     onLanguageCloseModal: () => void;
     modalTitle: string;
+    language: string;
+    setLanguage: (language: string) => void,
 }
 
-const RepoModal = ({finalRepos, isLanguageModalOpen, onLanguageCloseModal, modalTitle}: IRepoModalProps) => {
+const RepoModal = ({finalRepos, isLanguageModalOpen, onLanguageCloseModal, modalTitle, language, setLanguage }: IRepoModalProps) => {
 
     
+    const languages = ["All"]
+
+    finalRepos.forEach((repo: { language: string }) => {
+        if (repo.language && !languages.includes(repo.language)) {
+            languages.push(repo.language);
+        }
+    });
+
     return (
-        <Modal isModalOpen={isLanguageModalOpen} onCloseModal={onLanguageCloseModal} modalTitle={modalTitle} backModalClassName="justify-center items-center" modalClassName="w-120 h-160" titleClassName="text-lg">
-            Hello
+        <Modal isModalOpen={isLanguageModalOpen} onCloseModal={onLanguageCloseModal} modalTitle={modalTitle} backModalClassName="bg-black/0" modalClassName="absolute w-50 ml-120 -mt-5 p-4" titleClassName="text-sm font-bold">
+            {languages.map((item) => (
+                <div onClick={() => setLanguage(item)} className="flex flex-row items-center gap-x-2 w-full border-t border-gray-300 py-2 hover:bg-gray-100 cursor-pointer">
+                    <IoCheckmarkOutline className={language === item ? "inline" : "hidden"} />
+                    <span className="text-xs">{item}</span>
+                </div>
+            ))}
         </Modal>
     );
 };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CiStar } from "react-icons/ci";
 import { GoRepoForked } from "react-icons/go";
 import { IoMdArrowDropdown } from "react-icons/io";
@@ -25,6 +25,10 @@ const Repositories = ({ repoData }: { repoData: any }) => {
     const [isTypeModalOpen, setTypeModalOpen] = useState(false);
     const [isLanguageModalOpen, setLanguageModalOpen] = useState(false);
     const [isSortModalOpen, setSortModalOpen] = useState(false);
+
+    const [type, setType] = useState("All");
+    const [language, setLanguage] = useState("All");
+    const [sort, setSort] = useState("Last updated");
     
     const formatDate = (dateString: string) => {
         const date = new Date(dateString);
@@ -72,6 +76,24 @@ const Repositories = ({ repoData }: { repoData: any }) => {
     
     const [startPosition, setStartPosition] = useState(0)
 
+    useEffect(() => {
+        if (isTypeModalOpen) {
+            setLanguageModalOpen(false);
+            setSortModalOpen(false);
+            setTypeModalOpen(true);
+        }
+        if (isLanguageModalOpen) {
+            setTypeModalOpen(false);
+            setSortModalOpen(false);
+            setLanguageModalOpen(true);
+        }
+        if (isSortModalOpen) {
+            setTypeModalOpen(false);
+            setLanguageModalOpen(false);
+            setSortModalOpen(true);
+        }
+    }, [isTypeModalOpen,isLanguageModalOpen, isSortModalOpen]);
+
     return (
         <>
             <div className="flex w-full max-w-3xl flex-row border-b gap-x-2 border-gray-300 py-3">
@@ -95,9 +117,9 @@ const Repositories = ({ repoData }: { repoData: any }) => {
                     <IoMdArrowDropdown className="text-lg"/>
                 </button>
             </div>
-            <RepoTypeModal finalRepos={finalRepos} isTypeModalOpen={isTypeModalOpen} onTypeCloseModal={()=> setTypeModalOpen(false) } modalTitle="Select type" />
-            <RepoLanguageModal finalRepos={finalRepos} isLanguageModalOpen={isLanguageModalOpen} onLanguageCloseModal={()=> setLanguageModalOpen(false) } modalTitle="Select language" />
-            <RepoSortModal finalRepos={finalRepos} isSortModalOpen={isSortModalOpen} onSortCloseModal={()=> setSortModalOpen(false) } modalTitle="Select order" />
+            <RepoTypeModal type={type} setType={setType} isTypeModalOpen={isTypeModalOpen} onTypeCloseModal={()=> setTypeModalOpen(false) } modalTitle="Select type" />
+            <RepoLanguageModal finalRepos={finalRepos} language={language} setLanguage={setLanguage} isLanguageModalOpen={isLanguageModalOpen} onLanguageCloseModal={()=> setLanguageModalOpen(false) } modalTitle="Select language" />
+            <RepoSortModal sort={sort} setSort={setSort} isSortModalOpen={isSortModalOpen} onSortCloseModal={()=> setSortModalOpen(false) } modalTitle="Select order" />
             <div className="flex w-full max-w-3xl mx-auto flex-col">
                 {finalRepos.slice(startPosition, startPosition + 20).map((repo: any) => (
                     <div key={repo.name} className="flex flex-col border-b justify-between rounded border-gray-300 p-4 gap-y-2 gap-x-2">

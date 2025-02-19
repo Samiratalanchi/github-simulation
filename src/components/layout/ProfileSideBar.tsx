@@ -32,7 +32,7 @@ const ProfileSideBar = ({ children, userProfileData, isLeftSideMenuOpen, isRight
                     <div className="card flex-col items-center px-2">
                         <button 
                             type="button" 
-                            className={`${isLeftSideMenuOpen || isRightSideMenuOpen ? "-z-1" : "z-2"} absolute cursor-pointer flex flex-row items-center lg:mt-50 lg:ml-45 md:mt-50 md:ml-45 mt-42 ml-42 px-2 py-1 border border-gray-400 w-10 hover:w-25 h-10 rounded-full  bg-white  overflow-hidden transition-all duration-300 ease-in-out group `}
+                            className={`${isLeftSideMenuOpen || isRightSideMenuOpen ? "-z-1" : "z-2"} absolute cursor-pointer flex flex-row items-center lg:mt-50 lg:ml-52 md:mt-50 md:ml-40 mt-42 ml-42 px-2 py-1 border border-gray-400 w-10 hover:w-25 h-10 rounded-full  bg-white  overflow-hidden transition-all duration-300 ease-in-out group `}
                             >
                             <span className="flex text-[14px] transition-opacity duration-300 group-hover:opacity-100">
                                 👋
