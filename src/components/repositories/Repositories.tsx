@@ -150,15 +150,15 @@ const Repositories = ({ repoData }: { repoData: any }) => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                 />
-                <button type="button" onClick={() => setTypeModalOpen(true)} className="px-3 h-8 text-sm bg-gray-100 hover:bg-gray-200 rounded flex flex-row items-center justify-center">
+                <button type="button" onClick={() => setTypeModalOpen(!isTypeModalOpen)} className="px-3 h-8 text-sm bg-gray-100 hover:bg-gray-200 rounded flex flex-row items-center justify-center">
                     <span>Type</span>
                     <IoMdArrowDropdown className="text-lg"/>
                 </button>
-                <button type="button" onClick={() => setLanguageModalOpen(true)} className="px-3 h-8 text-sm bg-gray-100 hover:bg-gray-200 rounded flex flex-row items-center justify-center">
+                <button type="button" onClick={() => setLanguageModalOpen(!isLanguageModalOpen)} className="px-3 h-8 text-sm bg-gray-100 hover:bg-gray-200 rounded flex flex-row items-center justify-center">
                     <span>Language</span>
                     <IoMdArrowDropdown className="text-lg"/>
                 </button>
-                <button type="button" onClick={() => setSortModalOpen(true)} className="px-3 h-8 text-sm bg-gray-100 hover:bg-gray-200 rounded flex flex-row items-center justify-center">
+                <button type="button" onClick={() => setSortModalOpen(!isSortModalOpen)} className="px-3 h-8 text-sm bg-gray-100 hover:bg-gray-200 rounded flex flex-row items-center justify-center">
                     <span>Sort</span>
                     <IoMdArrowDropdown className="text-lg"/>
                 </button>

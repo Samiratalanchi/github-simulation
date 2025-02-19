@@ -15,7 +15,7 @@ const RepoModal = ({isSortModalOpen, onSortCloseModal, modalTitle, sort, setSort
     const sorts = ["Last updated","Name","Stars"]
 
     return (
-        <Modal isModalOpen={isSortModalOpen} onCloseModal={onSortCloseModal} modalTitle={modalTitle} backModalClassName="bg-black/0" modalClassName="absolute w-50 ml-140 -mt-5 p-4" titleClassName="text-sm font-bold">
+        <Modal isModalOpen={isSortModalOpen} onCloseModal={onSortCloseModal} modalTitle={modalTitle} modalClassName="absolute w-50 ml-218 -mt-110 p-4" titleClassName="text-sm font-bold">
             {sorts.map((item) => (
                 <div onClick={() => setSort(item)} className="flex flex-row items-center gap-x-2 w-full border-t border-gray-300 py-2 hover:bg-gray-100 cursor-pointer">
                     <IoCheckmarkOutline className={sort === item ? "inline" : "hidden"} />

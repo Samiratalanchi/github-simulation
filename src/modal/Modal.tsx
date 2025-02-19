@@ -5,9 +5,9 @@ interface IRepoModalProps {
     onCloseModal: () => void;
     modalTitle: string;
     children: React.ReactNode;
-    backModalClassName: string;
-    modalClassName: string;
-    titleClassName: string;
+    backModalClassName?: string;
+    modalClassName?: string;
+    titleClassName?: string;
 }
 
 
@@ -15,7 +15,7 @@ const Modal = ({ isModalOpen, onCloseModal, modalTitle, children, backModalClass
     if (!isModalOpen) return null;
 
     return (
-        <div onClick={onCloseModal} className={`inset-0 flex z-50 ${backModalClassName}`}>
+        <div onClick={onCloseModal} className={`justify-center fixed items-center inset-0 flex z-50 ${backModalClassName}`}>
             <div onClick={(e) => e.stopPropagation()}  className={`bg-white rounded-lg shadow-lg ${modalClassName}`}>
                 <div className={`flex justify-between items-center ${titleClassName}`}>
                     <h2 className=" font-semibold">{modalTitle}</h2>
