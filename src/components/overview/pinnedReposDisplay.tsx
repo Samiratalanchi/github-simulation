@@ -2,7 +2,7 @@ import { CiStar } from "react-icons/ci";
 import { GoRepoForked } from "react-icons/go";
 import { RiGitRepositoryLine } from "react-icons/ri";
 import { RxDragHandleDots2 } from "react-icons/rx";
-import colors from "../../colors/color.json"
+import colors from "../../data/color.json"
 
 const getLanguageColor = (language: string | undefined) => {
     if (!language || !(language in colors)) {

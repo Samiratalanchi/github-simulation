@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { CiStar } from "react-icons/ci";
 import { GoRepoForked } from "react-icons/go";
 import { IoMdArrowDropdown } from "react-icons/io";
-import colors from "../../colors/color.json"
+import colors from "../../data/color.json"
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import RepoTypeModal from "../../modal/repoModal/RepoTypeModal";
 import RepoLanguageModal from "../../modal/repoModal/RepoLanguageModal";
@@ -12,16 +12,6 @@ import { IoCloseSharp } from "react-icons/io5";
 const Repositories = ({ repoData }: { repoData: any }) => {
 
     const [searchQuery, setSearchQuery] = useState("");
-
-    /*const sortedRepos = [...(repoData || [])].sort(
-        (a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
-    );
-
-    const finalRepos = (sortedRepos || []).filter((repo: { name?: string, language?: string, private?: string }) => 
-        (type === "All" || repo.private?.toString() === type.toLowerCase()) && 
-        (language === "All" || repo.language === language) &&
-        (searchQuery.trim() ? repo.name?.toLowerCase().includes(searchQuery.toLowerCase()) : true)
-    );*/
 
     const filterAndSortRepos = () => {
         let filteredRepos = [...(repoData || [])];
