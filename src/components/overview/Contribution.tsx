@@ -40,6 +40,8 @@ const Contribution = ({ activeYearButton }: { activeYearButton: string }) => {
         return `${months[month]} ${dayOfMonth}`;
     }
 
+    const oneYearContribution = Object.values(contributions).reduce((acc, count) => acc + count, 0);
+
     const generateTableCells = (row: number) => {
         
         const x = 7 - firstDayIndex + row + 1
@@ -87,29 +89,32 @@ const Contribution = ({ activeYearButton }: { activeYearButton: string }) => {
     return (
         <>
             <div className="flex flex-row justify-between items-center">
-                <span className="flex text-lg">70 contributions in the last year</span>
+                <span className="flex text-lg">{oneYearContribution} contributions in {activeYearButton}</span>
                 <a className="flex text-xs text-gray-600 items-center hover:underline hover:text-blue-600">
                     Contribution setting <FaCaretDown />
                 </a>
             </div>
             <div className="flex flex-col border rounded border-gray-300 text-sm p-5 mb-5">
-                <div className="flex flex-row mb-1">
-                    {months.map((month, i) => (
-                        <span key={i} className="pl-8 text-xs">{month}</span>
-                    ))}
-                </div>
-                <table className="flex border-collapse border-spacing-0 mb-2 overflow-ellipsis">
-                    <tbody>
-                        {[...Array(7)].map((_, row) => (
-                            <tr key={row}>
-                                {row % 2 === 1 ? <td className="text-xs pr-1">{daysOfWeek[row]}</td> : <td></td>}
-
-                                {generateTableCells(row)}
-                                
-                            </tr>
+                <div className="flex flex-col overflow-x-auto max-w-170">
+                    <div className="flex flex-row mb-1">
+                        {months.map((month, i) => (
+                            <span key={i} className="pl-8 text-xs">{month}</span>
                         ))}
-                    </tbody>
-                </table>
+                    </div>
+                    <table className="flex border-collapse border-spacing-0 mb-2 overflow-ellipsis">
+                        <tbody>
+                            {[...Array(7)].map((_, row) => (
+                                <tr key={row}>
+                                    {row % 2 === 1 ? <td className="text-xs pr-1">{daysOfWeek[row]}</td> : <td></td>}
+                                    
+                                    {generateTableCells(row)}
+                                    
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+                
                 <div className="flex flex-row justify-between text-gray-600 items-center px-8 text-xs">
                     <a href="" className="flex hover:text-blue-600">Learn how we count contributions</a>
                     <div className="flex flex-row items-center gap-x-1 ">
