@@ -19,9 +19,9 @@ const PinnedReposDisplay = ({repoData, repoItem} : {repoData: any; repoItem: str
     return (
         <>
             {[...Array(repoRows)].map((_, i) => (
-                <div key={i} className="flex flex-row items-center justify-start w-full">
+                <div key={i} className="flex md:flex-row flex-col gap-y-2 items-center justify-start w-full">
                     {repoSelection.slice(i * 2, i * 2 + 2).map((repo:any) => (
-                        <div key={repo.name} className="flex flex-col border justify-between rounded border-gray-300 w-1/2 mx-2 p-4 gap-y-2 gap-x-2 h-30">
+                        <div key={repo.name} className="flex flex-col border justify-between rounded border-gray-300 md:w-1/2 w-full mx-2 p-4 md:gap-y-2 gap-x-2 min-h-30 h-auto">
                             <div className="flex flex-row justify-between items-center">
                                 <div className="flex flex-row items-center gap-x-2">
                                     <span className="flex text-gray-600 text-lg"><RiGitRepositoryLine /></span>

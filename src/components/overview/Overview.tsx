@@ -34,21 +34,21 @@ const Overview = ({ repoData }: { repoData: any }) => {
 
     return (
         <>
-            <div className="flex flex-col mb-3 w-full max-w-3xl">
+            <div className="flex flex-col mb-3 w-full md:max-w-3xl max-w-2xl">
                 <div className="flex flex-row justify-between items-center">
                     <span className="flex text-lg mb-3">Pinned</span>
                     <button type="button" onClick={() => setModalOpen(true)} className="text-xs text-blue-700 hover:underline">Customize your pins</button>
                 </div>
                 <RepoModal repoData={repoData} isModalOpen={isModalOpen} onCloseModal={()=> setModalOpen(false) } modalTitle="Edit pinned items" repoItem={repoItem} setRepoItem={setRepoItem} getPopularRepos={getPopularRepos} />
-                <div className="flex flex-col gap-y-4">
+                <div className="flex flex-col md:gap-y-4 gap-y-2">
                     <PinnedReposDisplay repoData={repoData} repoItem={repoItem} />
                 </div>
             </div>
-            <div className="flex flex-row gap-x-3 mb-3 justify-between">
+            <div className="flex md:flex-row flex-col gap-x-3 mb-3 justify-between md:max-w-3xl">
                 <div className="flex flex-col gap-y-1">
                     <Contribution activeYearButton={activeYearButton} />
                 </div>
-                <div className="flex flex-col gap-y-2 text-[12px] font-semibold">
+                <div className="flex md:flex-col gap-y-2 text-[12px] font-semibold justify-start flex-row-reverse">
                     {years.map((year) => (
                         <button
                             key={year}
