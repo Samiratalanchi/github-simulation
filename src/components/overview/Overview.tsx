@@ -40,11 +40,11 @@ const Overview = ({ repoData }: { repoData: any }) => {
                     <button type="button" onClick={() => setModalOpen(true)} className="text-xs text-blue-700 hover:underline">Customize your pins</button>
                 </div>
                 <RepoModal repoData={repoData} isModalOpen={isModalOpen} onCloseModal={()=> setModalOpen(false) } modalTitle="Edit pinned items" repoItem={repoItem} setRepoItem={setRepoItem} getPopularRepos={getPopularRepos} />
-                <div className="flex flex-col md:gap-y-4 gap-y-2">
+                <div className="flex flex-col gap-y-2">
                     <PinnedReposDisplay repoData={repoData} repoItem={repoItem} />
                 </div>
             </div>
-            <div className="flex md:flex-row flex-col gap-x-3 mb-3 justify-between md:max-w-3xl">
+            <div className="flex md:flex-row flex-col gap-x-3 mb-3 justify-between">
                 <div className="flex flex-col gap-y-1">
                     <Contribution activeYearButton={activeYearButton} />
                 </div>
