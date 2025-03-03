@@ -30,9 +30,9 @@ const HeaderLayout = ({ children, userProfileData, repoData, isLeftSideMenuOpen,
     const tabs = [
         { name: "Overview", icon: BsBook },
         { name: "Repositories", icon: RiGitRepositoryLine, count: userProfileData.public_repos },
-        { name: "Projects", icon: VscGithubProject, count: 20 },
-        { name: "Packages", icon: GoPackage, count: 20 },
-        { name: "Stars", icon: CiStar, count: 20 },
+        { name: "Projects", icon: VscGithubProject },
+        { name: "Packages", icon: GoPackage },
+        { name: "Stars", icon: CiStar },
     ];
 
     const navbarItems = {

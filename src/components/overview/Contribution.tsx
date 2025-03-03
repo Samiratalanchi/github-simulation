@@ -88,13 +88,13 @@ const Contribution = ({ activeYearButton }: { activeYearButton: string }) => {
 
     return (
         <>
-            <div className="flex flex-row justify-between items-center md:max-w-3xl max-w-2xl">
+            <div className="flex flex-row justify-between items-center md:max-w-3xl w-screen">
                 <span className="flex text-lg">{oneYearContribution} contributions in {activeYearButton}</span>
                 <a className="flex text-xs text-gray-600 items-center hover:underline hover:text-blue-600">
                     Contribution setting <FaCaretDown />
                 </a>
             </div>
-            <div className="flex flex-col border rounded border-gray-300 text-sm p-5 mb-5 md:max-w-3xl max-w-2xl">
+            <div className="flex flex-col border rounded border-gray-300 text-sm p-5 mb-5 md:max-w-3xl w-screen">
                 <div className="flex flex-col overflow-x-auto max-w-170">
                     <div className="flex flex-row mb-1">
                         {months.map((month, i) => (

@@ -132,7 +132,7 @@ const Repositories = ({ repoData }: { repoData: any }) => {
 
     return (
         <>
-            <div className="flex w-full max-w-3xl flex-row border-b gap-x-2 border-gray-300 py-3">
+            <div className="flex flex-row w-full border-b gap-x-2 border-gray-300 py-3">
                 <input
                     type="text"
                     className="border flex-grow border-gray-400 p-1 rounded text-sm focus:border-blue-800"
@@ -157,7 +157,7 @@ const Repositories = ({ repoData }: { repoData: any }) => {
             <RepoLanguageModal repoData={repoData} language={language} setLanguage={setLanguage} isLanguageModalOpen={isLanguageModalOpen} onLanguageCloseModal={()=> setLanguageModalOpen(false) } modalTitle="Select language" />
             <RepoSortModal sort={sort} setSort={setSort} isSortModalOpen={isSortModalOpen} onSortCloseModal={()=> setSortModalOpen(false) } modalTitle="Select order" />
             {(language !== "All" || type !== "All" || sort !== "Last updated") && (
-                <div className="flex w-full max-w-3xl mx-auto items-center justify-between flex-row border-b border-gray-300 p-4">
+                <div className="flex md:max-w-3xl w-2xl mx-auto items-center justify-between flex-row border-b border-gray-300 p-4">
                     <span><span className={finalRepos.length > 0 ? "text-green-600" : "text-red-600"}>{finalRepos.length}</span> results that have {language} language, in {type} type, sorted by {sort}</span>
                     <button type="button" onClick={() => clearFilter()} className="px-3 h-8 text-sm hover:text-blue-600 gap-x-2 rounded flex flex-row items-center justify-center cursor-pointer">
                         <IoCloseSharp className="text-xl p-1 bg-gray-200 rounded font-bold"/>
@@ -165,7 +165,7 @@ const Repositories = ({ repoData }: { repoData: any }) => {
                     </button>
                 </div>
             )}
-            <div className="flex w-full max-w-3xl mx-auto flex-col">
+            <div className="flex flex-col">
                 {finalRepos.slice(startPosition, startPosition + 20).map((repo: any) => (
                     <div key={repo.id} className="flex flex-col border-b justify-between rounded border-gray-300 p-4 gap-y-2 gap-x-2">
                         <div className="flex flex-row justify-between items-center">
@@ -207,7 +207,7 @@ const Repositories = ({ repoData }: { repoData: any }) => {
                 ))}
             </div>
             {finalRepos.length > 20 && (
-                <div className="flex w-full max-w-3xl mx-auto flex-row justify-center mb-10">
+                <div className="flex mx-auto flex-row justify-center mb-10">
                     <button type="button" onClick={() => setStartPosition(startPosition - 20)} disabled={startPosition - 20 < 0 } className="px-3 h-8 text-sm rounded flex flex-row items-center justify-center cursor-pointer text-blue-600 hover:border hover:border-gray-200 disabled:text-gray-300 disabled:cursor-not-allowed">
                         <GrFormPrevious className="text-lg"/>
                         <span>Previous</span>

@@ -34,7 +34,7 @@ const Overview = ({ repoData }: { repoData: any }) => {
 
     return (
         <>
-            <div className="flex flex-col mb-3 w-full md:max-w-3xl max-w-2xl">
+            <div className="flex flex-col mb-3 w-full">
                 <div className="flex flex-row justify-between items-center">
                     <span className="flex text-lg mb-3">Pinned</span>
                     <button type="button" onClick={() => setModalOpen(true)} className="text-xs text-blue-700 hover:underline">Customize your pins</button>

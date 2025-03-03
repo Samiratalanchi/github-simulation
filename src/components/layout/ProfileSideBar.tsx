@@ -28,7 +28,7 @@ const ProfileSideBar = ({ children, userProfileData, isLeftSideMenuOpen, isRight
     return (
         <>
             <div className="flex mx-auto mt-10 h-full md:flex-row gap-x-5 flex-col">
-                <div className="flex max-w-2xl md:max-w-1/4 min-w-auto">
+                <div className="flex md:w-1/4 w-screen">
                     <div className="card flex-col items-center px-2 w-full">
                         <div className="flex flex-row md:flex-col items-center md:items-start w-full">
                             <img 
@@ -60,18 +60,18 @@ const ProfileSideBar = ({ children, userProfileData, isLeftSideMenuOpen, isRight
                             <span className="font-semibold">{userProfileData.following}</span>
                             <span className="text-gray-600">following</span>
                         </div>
-                        <div className="md:flex items-center gap-x-1 text-sm mb-2 hidden md:block">
+                        <div className="md:flex items-center gap-x-1 text-sm mb-2 hidden">
                             <span className="text-gray-600 text-lg"><MdOutlineAccessTime /></span>
                             <span>{time}</span>
                             <span className="text-gray-600">({offsetFormatted})</span>
                         </div>
-                        <div className="flex items-center gap-x-1 text-sm mb-2">
+                        <div className="md:flex items-center gap-x-1 text-sm mb-2 hidden">
                             <span className="text-gray-600 text-lg"><IoIosLink /></span>
                             <a>{userProfileData.blog}</a>
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col gap-y-3 max-w-3xl lg:min-w-190 md:max-w-2xl md:mx-auto ml-3">
+                <div className="flex flex-col gap-y-3 w-screen md:w-screen lg:min-w-190 md:max-w-2xl px-2">
                     {children}
                 </div>
             </div>
