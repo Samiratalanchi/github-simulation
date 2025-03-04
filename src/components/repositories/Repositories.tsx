@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CiStar } from "react-icons/ci";
 import { GoRepoForked } from "react-icons/go";
 import { IoMdArrowDropdown } from "react-icons/io";
@@ -130,6 +130,10 @@ const Repositories = ({ repoData }: { repoData: any }) => {
         }
     }, [isTypeModalOpen,isLanguageModalOpen, isSortModalOpen]);
 
+    const typeButtonRef = useRef<HTMLButtonElement>(null);
+    const languageButtonRef = useRef<HTMLButtonElement>(null);
+    const sortButtonRef = useRef<HTMLButtonElement>(null);
+
     return (
         <>
             <div className="flex flex-row w-full border-b gap-x-2 border-gray-300 py-3">
@@ -140,24 +144,24 @@ const Repositories = ({ repoData }: { repoData: any }) => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                 />
-                <button type="button" onClick={() => setTypeModalOpen(!isTypeModalOpen)} className="px-3 h-8 text-sm bg-gray-100 hover:bg-gray-200 rounded flex flex-row items-center justify-center">
+                <button type="button" ref={typeButtonRef} onClick={() => setTypeModalOpen(!isTypeModalOpen)} className="px-3 h-8 text-sm bg-gray-100 hover:bg-gray-200 rounded flex flex-row items-center justify-center">
                     <span>Type</span>
                     <IoMdArrowDropdown className="text-lg"/>
                 </button>
-                <button type="button" onClick={() => setLanguageModalOpen(!isLanguageModalOpen)} className="px-3 h-8 text-sm bg-gray-100 hover:bg-gray-200 rounded flex flex-row items-center justify-center">
+                <button type="button" ref={languageButtonRef} onClick={() => setLanguageModalOpen(!isLanguageModalOpen)} className="px-3 h-8 text-sm bg-gray-100 hover:bg-gray-200 rounded flex flex-row items-center justify-center">
                     <span>Language</span>
                     <IoMdArrowDropdown className="text-lg"/>
                 </button>
-                <button type="button" onClick={() => setSortModalOpen(!isSortModalOpen)} className="px-3 h-8 text-sm bg-gray-100 hover:bg-gray-200 rounded flex flex-row items-center justify-center">
+                <button type="button" ref={sortButtonRef} onClick={() => setSortModalOpen(!isSortModalOpen)} className="px-3 h-8 text-sm bg-gray-100 hover:bg-gray-200 rounded flex flex-row items-center justify-center">
                     <span>Sort</span>
                     <IoMdArrowDropdown className="text-lg"/>
                 </button>
             </div>
-            <RepoTypeModal type={type} setType={setType} isTypeModalOpen={isTypeModalOpen} onTypeCloseModal={()=> setTypeModalOpen(false) } modalTitle="Select type" />
-            <RepoLanguageModal repoData={repoData} language={language} setLanguage={setLanguage} isLanguageModalOpen={isLanguageModalOpen} onLanguageCloseModal={()=> setLanguageModalOpen(false) } modalTitle="Select language" />
-            <RepoSortModal sort={sort} setSort={setSort} isSortModalOpen={isSortModalOpen} onSortCloseModal={()=> setSortModalOpen(false) } modalTitle="Select order" />
+            <RepoTypeModal type={type} setType={setType} isTypeModalOpen={isTypeModalOpen} onTypeCloseModal={()=> setTypeModalOpen(false) } modalTitle="Select type" buttonRef={typeButtonRef}/>
+            <RepoLanguageModal repoData={repoData} language={language} setLanguage={setLanguage} isLanguageModalOpen={isLanguageModalOpen} onLanguageCloseModal={()=> setLanguageModalOpen(false) } modalTitle="Select language" buttonRef={languageButtonRef} />
+            <RepoSortModal sort={sort} setSort={setSort} isSortModalOpen={isSortModalOpen} onSortCloseModal={()=> setSortModalOpen(false) } modalTitle="Select order" buttonRef={sortButtonRef} />
             {(language !== "All" || type !== "All" || sort !== "Last updated") && (
-                <div className="flex md:max-w-3xl w-2xl mx-auto items-center justify-between flex-row border-b border-gray-300 p-4">
+                <div className="flex items-center justify-between flex-row border-b border-gray-300 p-4">
                     <span><span className={finalRepos.length > 0 ? "text-green-600" : "text-red-600"}>{finalRepos.length}</span> results that have {language} language, in {type} type, sorted by {sort}</span>
                     <button type="button" onClick={() => clearFilter()} className="px-3 h-8 text-sm hover:text-blue-600 gap-x-2 rounded flex flex-row items-center justify-center cursor-pointer">
                         <IoCloseSharp className="text-xl p-1 bg-gray-200 rounded font-bold"/>
